@@ -1,0 +1,13 @@
+{
+  "item.projectares.perk_item_test"         : "Perk Item",
+
+  "effect.projectares.rampage"              : "Rampage",
+  "effect.projectares.thrill_of_the_kill"   : "Thrill of the Kill",
+
+  "projectares.tooltip.perks"               : "Perks:",
+  "projectares.perk.rampage"                : "Rampage",
+  "projectares.perk.vampirism"              : "Vampirism",
+  "projectares.perk.thrill_of_the_kill"     : "Thrill of the Kill",
+  "projectares.perk.top_heavy"              : "Top Heavy",
+  "projectares.perk.extended_blade"         : "Extended Blade"
+}
