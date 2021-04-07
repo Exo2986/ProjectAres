@@ -8,18 +8,20 @@ import sheepindev.projectares.ProjectAres;
 
 import java.util.Optional;
 
+import static sheepindev.projectares.util.RegistryHelper.prefix;
+
 public class ProjectAresPacketHandler {
     public static final byte EXTENDED_REACH_ID = 25;
 
     private static final String PROTOCOL_VERSION = "1";
     public static final SimpleChannel INSTANCE = NetworkRegistry.newSimpleChannel(
-            new ResourceLocation(ProjectAres.MOD_ID, "main"),
+            prefix("main"),
             () -> PROTOCOL_VERSION,
             PROTOCOL_VERSION::equals,
             PROTOCOL_VERSION::equals
     );
 
-    public static void SetupPackets() {
+    public static void setupPackets() {
         INSTANCE.registerMessage(EXTENDED_REACH_ID, ExtendedReachPacket.class,
                 ExtendedReachPacket::encode, ExtendedReachPacket::decode,
                 ExtendedReachPacketHandler::onMessageReceived,

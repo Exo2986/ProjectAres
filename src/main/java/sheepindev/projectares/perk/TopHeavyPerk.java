@@ -7,13 +7,9 @@ import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import static sheepindev.projectares.ProjectAres.LOGGER;
 
 public class TopHeavyPerk extends Perk {
-    @Override
-    public String GetID() {
-        return "top_heavy";
-    }
 
     @Override
-    public void OnHit(ItemStack item, LivingDamageEvent event) {
+    public void onHit(ItemStack item, LivingDamageEvent event) {
         if (event.getSource().getTrueSource() != null && event.getSource().getTrueSource().isLiving()) {
             LivingEntity owner = (LivingEntity) event.getSource().getTrueSource();
 

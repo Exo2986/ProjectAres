@@ -16,6 +16,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -25,38 +26,39 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.util.Constants;
 import sheepindev.projectares.ProjectAres;
 import sheepindev.projectares.perk.Perk;
-import sheepindev.projectares.perk.PerkRegistry;
+import sheepindev.projectares.registry.RegisterPerks;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.AbstractMap;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.function.Consumer;
+
+import static sheepindev.projectares.registry.RegisterPerks.getRegisteredPerk;
+import static sheepindev.projectares.util.RegistryHelper.prefix;
 
 public class PerkItem extends Item {
     public static final String NBT_TAG_NAME_PERK_LIST = "perks_list";
     public static final String NBT_TAG_NAME_PERK_COUNT = "num_perks";
     public static final String NBT_TAG_NAME_PERK_KEY = "perk_id";
 
-    protected int GetMaxPerks() { return 2; }
+    protected int getMaxPerks() { return 2; }
 
     public PerkItem(Properties properties) {
         super(properties);
     }
 
-    public void AddPerk(ItemStack stack, Perk perk) {
-        System.out.println("adding " + perk.GetID());
+    public void addPerk(ItemStack stack, Perk perk) {
+        System.out.println("adding " + perk.getRegistryName());
         CompoundNBT nbt = stack.getOrCreateTag();
 
         ListNBT perks = nbt.getList(NBT_TAG_NAME_PERK_LIST, Constants.NBT.TAG_COMPOUND);
 
         int currentPerkCount = nbt.getInt(NBT_TAG_NAME_PERK_COUNT);
 
-        if (currentPerkCount < GetMaxPerks()) {
+        if (currentPerkCount < getMaxPerks()) {
 
             CompoundNBT write = new CompoundNBT();
-            write.putString(NBT_TAG_NAME_PERK_KEY, perk.GetID());
+            write.putString(NBT_TAG_NAME_PERK_KEY, perk.getRegistryName().toString());
 
             perks.add(write); //Add perk to list
             nbt.put(NBT_TAG_NAME_PERK_LIST, perks); //Add list to NBT
@@ -68,14 +70,14 @@ public class PerkItem extends Item {
         }
     }
 
-    public Perk[] GetPerks(ItemStack stack) {
+    public Perk[] getPerks(ItemStack stack) {
         CompoundNBT nbt = stack.getOrCreateTag();
         ListNBT perks = nbt.getList(NBT_TAG_NAME_PERK_LIST, Constants.NBT.TAG_COMPOUND);
 
-        Perk[] perkArray = new Perk[GetMaxPerks()];
+        Perk[] perkArray = new Perk[getMaxPerks()];
 
-        for (int i = 0; i < GetMaxPerks(); i++) {
-            perkArray[i] = PerkRegistry.GetPerk(perks.getCompound(i).getString(NBT_TAG_NAME_PERK_KEY));
+        for (int i = 0; i < getMaxPerks(); i++) {
+            perkArray[i] = getRegisteredPerk(perks.getCompound(i).getString(NBT_TAG_NAME_PERK_KEY));
             if (perkArray[i] == null)
                 perkArray[i] = new Perk(); //We don't want nullables
         }
@@ -83,12 +85,12 @@ public class PerkItem extends Item {
         return perkArray;
     }
 
-    public boolean HasPerk(ItemStack stack, String perkID) {
-        Perk[] perks = GetPerks(stack);
+    public boolean hasPerk(ItemStack stack, String perkID) {
+        Perk[] perks = getPerks(stack);
         boolean found = false;
 
         for (Perk perk : perks) {
-            if (perk.GetID().equals(perkID)) {
+            if (perk.getRegistryName().toString().equals(perkID)) {
                 found = true;
             }
         }
@@ -96,19 +98,42 @@ public class PerkItem extends Item {
         return found;
     }
 
-    public void FirePerkEvent(ItemStack stack, Consumer<Perk> action) {
-        Arrays.stream(GetPerks(stack)).forEach(action);
+    public void firePerkEvent(ItemStack stack, Consumer<Perk> action) {
+        Arrays.stream(getPerks(stack)).forEach(action);
     }
 
-    public void ShufflePerks(ItemStack stack) {
-        Perk[] perks = GetPerks(stack);
+//    public void shufflePerks(ItemStack stack) {
+//        Perk[] perks = getPerks(stack);
+//
+//        for (Perk perk : perks) {
+//            if (perk == null || perk.getClass().equals(Perk.class)) {
+//                addPerk(stack,getRegisteredPerk(prefix("extended_blade")));
+//                addPerk(stack,getRegisteredPerk(prefix("top_heavy")));
+//            }
+//        }
+//    }
 
-        for (Perk perk : perks) {
-            if (perk == null || perk.getClass().equals(Perk.class)) {
-                AddPerk(stack,PerkRegistry.GetPerk("extended_blade"));
-                AddPerk(stack,PerkRegistry.GetPerk("top_heavy"));
-                System.out.println("perks added");
-            }
+    public Perk randomExcluding(ArrayList<Perk> perks, ArrayList<Perk> excluding) {
+        perks.removeAll(excluding);
+        int random = new Random().nextInt(perks.size());
+        return perks.get(random);
+    }
+
+    public void randomizePerk(ItemStack stack) {
+        Perk[] perks = getPerks(stack);
+
+        ArrayList<Perk> perkList = new ArrayList<Perk>(Arrays.asList(RegisterPerks.getRegisteredPerks()));
+        ArrayList<Perk> excluding = new ArrayList<Perk>();
+
+        if (perks[0] == null || perks[0].getClass().equals(Perk.class)) {
+
+            addPerk(stack,randomExcluding(perkList,excluding));
+
+        } else if (perks[1].getClass().equals(Perk.class)) {
+
+            excluding.add(perks[0]);
+            addPerk(stack,randomExcluding(perkList,excluding));
+
         }
     }
 
@@ -121,8 +146,8 @@ public class PerkItem extends Item {
             builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", 4, AttributeModifier.Operation.ADDITION));
             builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", 1, AttributeModifier.Operation.ADDITION));
 
-            Arrays.stream(GetPerks(stack)).forEach((perk -> {
-                AbstractMap.SimpleEntry<Attribute, AttributeModifier> modifier = perk.GetAttributeModifiers(stack);
+            Arrays.stream(getPerks(stack)).forEach((perk -> {
+                AbstractMap.SimpleEntry<Attribute, AttributeModifier> modifier = perk.getAttributeModifiers(stack);
                 if (modifier != null) {
                     builder.put(modifier.getKey(), modifier.getValue());
                 }
@@ -137,7 +162,7 @@ public class PerkItem extends Item {
     @Override
     public boolean onEntitySwing(ItemStack stack, LivingEntity entity)
     {
-        FirePerkEvent(stack, (a) -> a.OnSwing(stack, entity));
+        firePerkEvent(stack, (a) -> a.onSwing(stack, entity));
         return false;
     }
 
@@ -147,9 +172,10 @@ public class PerkItem extends Item {
 
         if (world.isRemote()) return ActionResult.resultPass(stack);
 
-        FirePerkEvent(stack, (a) -> a.OnRightClick(stack, player));
+        firePerkEvent(stack, (a) -> a.onRightClick(stack, player));
 
-        ShufflePerks(stack);
+        randomizePerk(stack);
+        randomizePerk(stack);
 
         return ActionResult.resultPass(stack);
     }
@@ -157,7 +183,7 @@ public class PerkItem extends Item {
     @Override
     public void inventoryTick(@Nonnull ItemStack stack, @Nonnull World worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
         if (isSelected) {
-            FirePerkEvent(stack, (a) -> a.OnTick(stack, entityIn));
+            firePerkEvent(stack, (a) -> a.onTick(stack, entityIn));
         }
     }
 
@@ -166,7 +192,10 @@ public class PerkItem extends Item {
     public void addInformation(@Nonnull ItemStack itemStack, @Nullable World world, List<ITextComponent> tooltip, @Nonnull ITooltipFlag advanced) {
         tooltip.add(new TranslationTextComponent("projectares.tooltip.perks").mergeStyle(TextFormatting.GRAY));
 
-        Arrays.stream(GetPerks(itemStack)).forEach((a) ->
-                tooltip.add(new TranslationTextComponent(ProjectAres.MOD_ID + ".perk." + a.GetID()).mergeStyle(TextFormatting.GOLD)));
+        Arrays.stream(getPerks(itemStack)).forEach((a) -> {
+            ResourceLocation name = a.getRegistryName();
+            if (name == null) return;
+            tooltip.add(new TranslationTextComponent(ProjectAres.MOD_ID + ".perk." + name.getPath()).mergeStyle(TextFormatting.GOLD));
+        });
     }
 }

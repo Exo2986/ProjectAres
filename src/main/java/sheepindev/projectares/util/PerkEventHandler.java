@@ -22,7 +22,7 @@ public class PerkEventHandler {
 
                 PerkItem item = (PerkItem) itemStack.getItem();
 
-                item.FirePerkEvent(itemStack, (a) -> a.OnOwnerDamage(itemStack, event));
+                item.firePerkEvent(itemStack, (a) -> a.onOwnerDamage(itemStack, event));
             }
         }
 
@@ -37,9 +37,9 @@ public class PerkEventHandler {
                     PerkItem item = (PerkItem) itemStack.getItem();
 
                     if (target.getHealth() - event.getAmount() <= 0) {
-                        item.FirePerkEvent(itemStack, (a) -> a.OnKill(itemStack, event));
+                        item.firePerkEvent(itemStack, (a) -> a.onKill(itemStack, event));
                     } else {
-                        item.FirePerkEvent(itemStack, (a) -> a.OnHit(itemStack, event));
+                        item.firePerkEvent(itemStack, (a) -> a.onHit(itemStack, event));
                     }
                 }
             }
@@ -55,7 +55,7 @@ public class PerkEventHandler {
 
                 PerkItem item = (PerkItem) itemStack.getItem();
 
-                item.FirePerkEvent(itemStack, (a) -> a.OnOwnerDeath(itemStack, owner));
+                item.firePerkEvent(itemStack, (a) -> a.onOwnerDeath(itemStack, owner));
             }
         }
     }
@@ -70,7 +70,7 @@ public class PerkEventHandler {
 
                 PerkItem item = (PerkItem) itemStack.getItem();
 
-                item.FirePerkEvent(itemStack, (a) -> a.OnCrit(itemStack, event));
+                item.firePerkEvent(itemStack, (a) -> a.onCrit(itemStack, event));
             }
         }
     }

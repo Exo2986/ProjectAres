@@ -7,13 +7,9 @@ import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import sheepindev.projectares.registry.RegisterEffects;
 
 public class ThrillPerk extends Perk{
-    @Override
-    public String GetID() {
-        return "thrill_of_the_kill";
-    }
 
     @Override
-    public void OnKill(ItemStack item, LivingDamageEvent event) {
+    public void onKill(ItemStack item, LivingDamageEvent event) {
         if (event.getSource().getTrueSource() != null
                 && event.getSource().getTrueSource() instanceof LivingEntity) {
             LivingEntity entity = (LivingEntity) event.getSource().getTrueSource();

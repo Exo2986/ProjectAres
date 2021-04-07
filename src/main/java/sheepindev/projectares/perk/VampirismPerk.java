@@ -5,13 +5,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 
 public class VampirismPerk extends Perk {
-    @Override
-    public String GetID() {
-        return "vampirism";
-    }
 
     @Override
-    public void OnHit(ItemStack item, LivingDamageEvent event) {
+    public void onHit(ItemStack item, LivingDamageEvent event) {
         if (event.getSource().getTrueSource() != null && event.getSource().getTrueSource().isLiving()) {
 
             LivingEntity owner = (LivingEntity) event.getSource().getTrueSource();
@@ -21,7 +17,7 @@ public class VampirismPerk extends Perk {
     }
 
     @Override
-    public void OnKill(ItemStack item, LivingDamageEvent event) {
+    public void onKill(ItemStack item, LivingDamageEvent event) {
         if (event.getSource().getTrueSource() != null && event.getSource().getTrueSource().isLiving()) {
 
             LivingEntity owner = (LivingEntity) event.getSource().getTrueSource();

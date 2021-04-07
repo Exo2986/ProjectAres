@@ -15,12 +15,7 @@ public class ReachPerk extends Perk{
     public static float EXTENDED_REACH_DISTANCE = 25;
 
     @Override
-    public String GetID() {
-        return "extended_blade";
-    }
-
-    @Override
-    public void OnSwing(ItemStack item, Entity owner) {
+    public void onSwing(ItemStack item, Entity owner) {
         if (!owner.world.isRemote()) return;
 
         EntityRayTraceResult target = RayTracingHelper.entityRayTrace(owner, EXTENDED_REACH_DISTANCE);

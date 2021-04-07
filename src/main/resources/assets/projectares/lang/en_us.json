@@ -4,6 +4,8 @@
   "effect.projectares.rampage"              : "Rampage",
   "effect.projectares.thrill_of_the_kill"   : "Thrill of the Kill",
 
+  "projectares.perk.unknown"                : "Unknown perk: %s",
+
   "projectares.tooltip.perks"               : "Perks:",
   "projectares.perk.rampage"                : "Rampage",
   "projectares.perk.vampirism"              : "Vampirism",

@@ -11,6 +11,7 @@ import sheepindev.projectares.perk.ReachPerk;
 import java.util.function.Supplier;
 
 import static sheepindev.projectares.ProjectAres.LOGGER;
+import static sheepindev.projectares.util.RegistryHelper.prefix;
 
 public class ExtendedReachPacketHandler {
     public static void onMessageReceived(final ExtendedReachPacket message, Supplier<NetworkEvent.Context> ctxSupplier) {
@@ -49,7 +50,7 @@ public class ExtendedReachPacketHandler {
 
                 PerkItem item = (PerkItem) player.getHeldItemMainhand().getItem();
 
-                if (item.HasPerk(player.getHeldItemMainhand(), "extended_blade")) {
+                if (item.hasPerk(player.getHeldItemMainhand(), prefix("extended_blade").toString())) {
                     LOGGER.debug("ATTACKING!!!!");
                     player.attackTargetEntityWithCurrentItem(target);
                 } else {
