@@ -10,7 +10,7 @@ public class TopHeavyPerk extends Perk {
 
     @Override
     public void onHit(ItemStack item, LivingDamageEvent event) {
-        if (event.getSource().getTrueSource() != null && event.getSource().getTrueSource().isLiving()) {
+        if (event.getSource().getTrueSource() != null && event.getSource().getTrueSource() instanceof LivingEntity) {
             LivingEntity owner = (LivingEntity) event.getSource().getTrueSource();
 
             float modifier = (float) owner.getPositionVec().distanceTo(event.getEntityLiving().getPositionVec());

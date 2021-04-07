@@ -13,6 +13,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraftforge.registries.ForgeRegistries;
 import sheepindev.projectares.ProjectAres;
 import sheepindev.projectares.perk.Perk;
 import sheepindev.projectares.registry.RegisterPerks;
