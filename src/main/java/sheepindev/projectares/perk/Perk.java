@@ -5,6 +5,7 @@ import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
@@ -14,7 +15,7 @@ public class Perk extends ForgeRegistryEntry<Perk> {
 
     public void onTick(ItemStack item, Entity owner) {}
 
-    public void onKill(ItemStack item, LivingDamageEvent event) {} //Event.Entity is the target, not the owner
+    public void onKill(ItemStack item, LivingDeathEvent event) {} //Event.Entity is the target, not the owner
 
     public void onOwnerDamage(ItemStack item, LivingDamageEvent event) {}
 

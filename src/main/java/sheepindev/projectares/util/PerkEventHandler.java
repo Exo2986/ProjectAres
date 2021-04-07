@@ -36,11 +36,7 @@ public class PerkEventHandler {
                 if (itemStack.getItem() instanceof PerkItem) {
                     PerkItem item = (PerkItem) itemStack.getItem();
 
-                    if (target.getHealth() - event.getAmount() <= 0) {
-                        item.firePerkEvent(itemStack, (a) -> a.onKill(itemStack, event));
-                    } else {
-                        item.firePerkEvent(itemStack, (a) -> a.onHit(itemStack, event));
-                    }
+                    item.firePerkEvent(itemStack, (a) -> a.onHit(itemStack, event));
                 }
             }
         }
@@ -56,6 +52,22 @@ public class PerkEventHandler {
                 PerkItem item = (PerkItem) itemStack.getItem();
 
                 item.firePerkEvent(itemStack, (a) -> a.onOwnerDeath(itemStack, owner));
+                return;
+            }
+        }
+
+        if (event.getSource().getTrueSource() != null
+                && event.getSource().getTrueSource() instanceof LivingEntity) {
+            LivingEntity entity = (LivingEntity) event.getSource().getTrueSource();
+
+            for (ItemStack itemStack : entity.getHeldEquipment()) {
+                if (itemStack.getItem() instanceof PerkItem) {
+
+                    PerkItem item = (PerkItem) itemStack.getItem();
+
+                    item.firePerkEvent(itemStack, (a) -> a.onKill(itemStack, event));
+                    return;
+                }
             }
         }
     }

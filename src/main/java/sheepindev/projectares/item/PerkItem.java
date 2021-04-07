@@ -143,8 +143,8 @@ public class PerkItem extends Item {
 
             ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
 
-            builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", 4, AttributeModifier.Operation.ADDITION));
-            builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", 1, AttributeModifier.Operation.ADDITION));
+            builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", 7, AttributeModifier.Operation.ADDITION));
+            builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", 0.1, AttributeModifier.Operation.ADDITION));
 
             Arrays.stream(getPerks(stack)).forEach((perk -> {
                 AbstractMap.SimpleEntry<Attribute, AttributeModifier> modifier = perk.getAttributeModifiers(stack);

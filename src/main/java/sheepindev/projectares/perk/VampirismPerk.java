@@ -3,6 +3,7 @@ package sheepindev.projectares.perk;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
 public class VampirismPerk extends Perk {
 
@@ -13,16 +14,6 @@ public class VampirismPerk extends Perk {
             LivingEntity owner = (LivingEntity) event.getSource().getTrueSource();
 
             owner.heal(event.getAmount()/2f);
-        }
-    }
-
-    @Override
-    public void onKill(ItemStack item, LivingDamageEvent event) {
-        if (event.getSource().getTrueSource() != null && event.getSource().getTrueSource().isLiving()) {
-
-            LivingEntity owner = (LivingEntity) event.getSource().getTrueSource();
-
-            owner.heal(event.getAmount());
         }
     }
 }

@@ -20,5 +20,5 @@ public class RegisterEffects {
             new RampageEffect(EffectType.BENEFICIAL, 9643043, 1.1D).addAttributesModifier(Attributes.ATTACK_DAMAGE, String.valueOf(UUID.randomUUID()), 0.0D, AttributeModifier.Operation.ADDITION));
 
     public static final RegistryObject<Effect> THRILL_EFFECT = EFFECTS.register("thrill_of_the_kill", () ->
-            new BasicEffect(EffectType.BENEFICIAL, 9643043).addAttributesModifier(Attributes.ATTACK_SPEED, String.valueOf(UUID.randomUUID()), 0.15F, AttributeModifier.Operation.MULTIPLY_TOTAL));
+            new BasicEffect(EffectType.BENEFICIAL, 9643043).addAttributesModifier(Attributes.ATTACK_SPEED, String.valueOf(UUID.randomUUID()), 0.3F, AttributeModifier.Operation.MULTIPLY_TOTAL));
 }
