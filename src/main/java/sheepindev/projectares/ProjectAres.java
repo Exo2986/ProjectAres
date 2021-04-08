@@ -18,6 +18,7 @@ import sheepindev.projectares.registry.RegisterCommands;
 import sheepindev.projectares.registry.RegisterEffects;
 import sheepindev.projectares.registry.RegisterItems;
 import sheepindev.projectares.registry.RegisterPerks;
+import sheepindev.projectares.util.EternalPerkEventHandler;
 import sheepindev.projectares.util.PerkEventHandler;
 
 @Mod("projectares")
@@ -38,6 +39,7 @@ public class ProjectAres {
 
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new PerkEventHandler());
+        MinecraftForge.EVENT_BUS.register(new EternalPerkEventHandler());
         MinecraftForge.EVENT_BUS.register(RegisterCommands.class);
     }
 

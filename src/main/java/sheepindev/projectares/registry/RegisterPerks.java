@@ -53,5 +53,6 @@ public class RegisterPerks {
         registry.register(new ThrillPerk()   .setRegistryName("thrill_of_the_kill"));
         registry.register(new TopHeavyPerk() .setRegistryName("top_heavy"));
         registry.register(new ReachPerk()    .setRegistryName("extended_blade"));
+        registry.register(new EternalPerk()  .setRegistryName("eternal"));
     }
 }
