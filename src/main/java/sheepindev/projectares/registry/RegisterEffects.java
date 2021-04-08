@@ -21,4 +21,7 @@ public class RegisterEffects {
 
     public static final RegistryObject<Effect> THRILL_EFFECT = EFFECTS.register("thrill_of_the_kill", () ->
             new BasicEffect(EffectType.BENEFICIAL, 9643043).addAttributesModifier(Attributes.ATTACK_SPEED, String.valueOf(UUID.randomUUID()), 0.3F, AttributeModifier.Operation.MULTIPLY_TOTAL));
+
+    public static final RegistryObject<Effect> ADRENALINE_RUSH_EFFECT = EFFECTS.register("adrenaline_rush", () ->
+            new BasicEffect(EffectType.BENEFICIAL, 9643043).addAttributesModifier(Attributes.ATTACK_SPEED, String.valueOf(UUID.randomUUID()), 0.3F, AttributeModifier.Operation.MULTIPLY_TOTAL));
 }

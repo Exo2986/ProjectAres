@@ -3,14 +3,17 @@
 
   "effect.projectares.rampage"              : "Rampage",
   "effect.projectares.thrill_of_the_kill"   : "Thrill of the Kill",
+  "effect.projectares.adrenaline_rush"      : "Adrenaline Rush",
 
   "projectares.perk.unknown"                : "Unknown perk: %s",
 
   "projectares.tooltip.perks"               : "Perks:",
+
   "projectares.perk.rampage"                : "Rampage",
   "projectares.perk.vampirism"              : "Vampirism",
   "projectares.perk.thrill_of_the_kill"     : "Thrill of the Kill",
   "projectares.perk.top_heavy"              : "Top Heavy",
   "projectares.perk.extended_blade"         : "Extended Blade",
-  "projectares.perk.eternal"                : "Eternal"
+  "projectares.perk.eternal"                : "Eternal",
+  "projectares.perk.adrenaline_rush"        : "Adrenaline Rush"
 }

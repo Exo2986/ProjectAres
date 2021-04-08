@@ -48,11 +48,12 @@ public class RegisterPerks {
         LOGGER.debug("Registering perks!!");
         IForgeRegistry<Perk> registry = event.getRegistry();
         LOGGER.debug(registry == null);
-        registry.register(new RampagePerk()  .setRegistryName("rampage"));
-        registry.register(new VampirismPerk().setRegistryName("vampirism"));
-        registry.register(new ThrillPerk()   .setRegistryName("thrill_of_the_kill"));
-        registry.register(new TopHeavyPerk() .setRegistryName("top_heavy"));
-        registry.register(new ReachPerk()    .setRegistryName("extended_blade"));
-        registry.register(new EternalPerk()  .setRegistryName("eternal"));
+        registry.register(new RampagePerk()         .setRegistryName("rampage"));
+        registry.register(new VampirismPerk()       .setRegistryName("vampirism"));
+        registry.register(new ThrillPerk()          .setRegistryName("thrill_of_the_kill"));
+        registry.register(new TopHeavyPerk()        .setRegistryName("top_heavy"));
+        registry.register(new ReachPerk()           .setRegistryName("extended_blade"));
+        registry.register(new EternalPerk()         .setRegistryName("eternal"));
+        registry.register(new AdrenalineRushPerk()  .setRegistryName("adrenaline_rush"));
     }
 }
