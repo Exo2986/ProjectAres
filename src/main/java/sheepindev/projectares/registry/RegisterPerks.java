@@ -55,5 +55,6 @@ public class RegisterPerks {
         registry.register(new ReachPerk()           .setRegistryName("extended_blade"));
         registry.register(new EternalPerk()         .setRegistryName("eternal"));
         registry.register(new AdrenalineRushPerk()  .setRegistryName("adrenaline_rush"));
+        registry.register(new SurroundedPerk()      .setRegistryName("surrounded"));
     }
 }
