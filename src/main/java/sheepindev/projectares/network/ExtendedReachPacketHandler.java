@@ -11,6 +11,7 @@ import sheepindev.projectares.perk.ReachPerk;
 import java.util.function.Supplier;
 
 import static sheepindev.projectares.ProjectAres.LOGGER;
+import static sheepindev.projectares.util.PerkItemHelper.isPerkItemAndHasPerk;
 import static sheepindev.projectares.util.RegistryHelper.prefix;
 
 public class ExtendedReachPacketHandler {
@@ -46,16 +47,12 @@ public class ExtendedReachPacketHandler {
 
             LOGGER.debug(distance);
 
-            if (distance <= ReachPerk.EXTENDED_REACH_DISTANCE && player.getHeldItemMainhand().getItem() instanceof PerkItem) {
+            if (distance <= ReachPerk.EXTENDED_REACH_DISTANCE && isPerkItemAndHasPerk(player.getHeldItemMainhand(), prefix("extended_blade"))) {
 
                 PerkItem item = (PerkItem) player.getHeldItemMainhand().getItem();
 
-                if (item.hasPerk(player.getHeldItemMainhand(), prefix("extended_blade").toString())) {
-                    LOGGER.debug("ATTACKING!!!!");
-                    player.attackTargetEntityWithCurrentItem(target);
-                } else {
-                    LOGGER.warn("Received ExtendedReachPacket with invalid PerkItem");
-                }
+                LOGGER.debug("ATTACKING!!!!");
+                player.attackTargetEntityWithCurrentItem(target);
             } else {
                 LOGGER.warn("Received ExtendedReachPacket with invalid entity distance");
             }

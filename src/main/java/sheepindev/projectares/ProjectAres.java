@@ -2,7 +2,6 @@ package sheepindev.projectares;
 
 import net.minecraft.command.arguments.ArgumentSerializer;
 import net.minecraft.command.arguments.ArgumentTypes;
-import net.minecraft.command.arguments.EntityArgument;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -12,14 +11,15 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import sheepindev.projectares.command.arguments.PerkArgument;
+import sheepindev.projectares.event.EvasionPerkEventHandlerClient;
 import sheepindev.projectares.network.ProjectAresPacketHandler;
 import sheepindev.projectares.perk.Perk;
 import sheepindev.projectares.registry.RegisterCommands;
 import sheepindev.projectares.registry.RegisterEffects;
 import sheepindev.projectares.registry.RegisterItems;
 import sheepindev.projectares.registry.RegisterPerks;
-import sheepindev.projectares.util.EternalPerkEventHandler;
-import sheepindev.projectares.util.PerkEventHandler;
+import sheepindev.projectares.event.EternalPerkEventHandler;
+import sheepindev.projectares.event.PerkEventHandler;
 
 @Mod("projectares")
 public class ProjectAres {
@@ -40,6 +40,7 @@ public class ProjectAres {
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new PerkEventHandler());
         MinecraftForge.EVENT_BUS.register(new EternalPerkEventHandler());
+        MinecraftForge.EVENT_BUS.register(new EvasionPerkEventHandlerClient());
         MinecraftForge.EVENT_BUS.register(RegisterCommands.class);
     }
 

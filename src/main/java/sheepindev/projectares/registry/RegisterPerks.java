@@ -7,6 +7,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
+import sheepindev.projectares.network.EvasionPacketHandler;
 import sheepindev.projectares.perk.*;
 
 import java.util.Random;
@@ -56,5 +57,6 @@ public class RegisterPerks {
         registry.register(new EternalPerk()         .setRegistryName("eternal"));
         registry.register(new AdrenalineRushPerk()  .setRegistryName("adrenaline_rush"));
         registry.register(new SurroundedPerk()      .setRegistryName("surrounded"));
+        registry.register(new EvasionPerk()         .setRegistryName("evasion"));
     }
 }

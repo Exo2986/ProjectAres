@@ -1,4 +1,4 @@
-package sheepindev.projectares.util;
+package sheepindev.projectares.event;
 
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -13,6 +13,7 @@ import sheepindev.projectares.item.PerkItem;
 import java.util.Iterator;
 
 import static sheepindev.projectares.util.RegistryHelper.prefix;
+import static sheepindev.projectares.util.PerkItemHelper.isPerkItemAndHasPerk;
 
 public class EternalPerkEventHandler {
 
@@ -30,13 +31,11 @@ public class EternalPerkEventHandler {
 
                 ItemStack stack = iterator.next().getItem();
 
-                if (stack.getItem() instanceof PerkItem) {
+                if (isPerkItemAndHasPerk(stack, prefix("eternal"))) {
                     PerkItem item = (PerkItem) stack.getItem();
 
-                    if (item.hasPerk(stack, prefix("eternal").toString())) {
-                        if (player.addItemStackToInventory(stack.copy())) {
-                            iterator.remove();
-                        }
+                    if (player.addItemStackToInventory(stack.copy())) {
+                        iterator.remove();
                     }
                 }
             }
@@ -56,14 +55,12 @@ public class EternalPerkEventHandler {
 
             ItemStack stack = oldPlayer.inventory.mainInventory.get(slot);
 
-            if (stack.getItem() instanceof PerkItem) {
+            if (isPerkItemAndHasPerk(stack,prefix("eternal"))) {
 
                 PerkItem item = (PerkItem) stack.getItem();
 
-                if (item.hasPerk(stack, prefix("eternal").toString())) {
-                    newPlayer.addItemStackToInventory(stack);
-                    oldPlayer.inventory.mainInventory.set(slot, ItemStack.EMPTY);
-                }
+                newPlayer.addItemStackToInventory(stack);
+                oldPlayer.inventory.mainInventory.set(slot, ItemStack.EMPTY);
 
             }
 

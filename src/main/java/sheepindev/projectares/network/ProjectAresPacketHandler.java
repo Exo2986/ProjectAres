@@ -11,7 +11,8 @@ import java.util.Optional;
 import static sheepindev.projectares.util.RegistryHelper.prefix;
 
 public class ProjectAresPacketHandler {
-    public static final byte EXTENDED_REACH_ID = 25;
+    public static final byte EXTENDED_REACH_ID = 1;
+    public static final byte EVASION_ID = 2;
 
     private static final String PROTOCOL_VERSION = "1";
     public static final SimpleChannel INSTANCE = NetworkRegistry.newSimpleChannel(
@@ -25,6 +26,10 @@ public class ProjectAresPacketHandler {
         INSTANCE.registerMessage(EXTENDED_REACH_ID, ExtendedReachPacket.class,
                 ExtendedReachPacket::encode, ExtendedReachPacket::decode,
                 ExtendedReachPacketHandler::onMessageReceived,
+                Optional.of(NetworkDirection.PLAY_TO_SERVER));
+        INSTANCE.registerMessage(EVASION_ID, EvasionPacket.class,
+                EvasionPacket::encode, EvasionPacket::decode,
+                EvasionPacketHandler::onMessageReceived,
                 Optional.of(NetworkDirection.PLAY_TO_SERVER));
     }
 }

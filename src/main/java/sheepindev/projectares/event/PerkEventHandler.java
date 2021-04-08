@@ -1,4 +1,4 @@
-package sheepindev.projectares.util;
+package sheepindev.projectares.event;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
