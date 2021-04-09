@@ -58,5 +58,6 @@ public class RegisterPerks {
         registry.register(new AdrenalineRushPerk()  .setRegistryName("adrenaline_rush"));
         registry.register(new SurroundedPerk()      .setRegistryName("surrounded"));
         registry.register(new EvasionPerk()         .setRegistryName("evasion"));
+        registry.register(new VortexStrikePerk()    .setRegistryName("vortex_strike"));
     }
 }
