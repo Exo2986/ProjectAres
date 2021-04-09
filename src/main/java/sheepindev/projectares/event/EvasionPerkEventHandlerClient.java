@@ -1,18 +1,12 @@
 package sheepindev.projectares.event;
 
-import net.java.games.input.Keyboard;
 import net.minecraft.client.GameSettings;
-import net.minecraft.client.KeyboardListener;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
-import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraftforge.client.event.InputEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import org.lwjgl.glfw.GLFW;
 import sheepindev.projectares.network.EvasionPacket;
 import sheepindev.projectares.network.ProjectAresPacketHandler;
 
@@ -20,10 +14,11 @@ import static sheepindev.projectares.enums.EvasionPerkEnum.*;
 import static sheepindev.projectares.util.RegistryHelper.prefix;
 import static sheepindev.projectares.util.PerkItemHelper.isPerkItemAndHasPerk;
 
+@OnlyIn(Dist.CLIENT)
 public class EvasionPerkEventHandlerClient {
 
-    private int[] timers = new int[3]; //0 = left, 1 = right, 2 = back
-    private boolean[] wasPressedLastFrame = new boolean[3];
+    private final int[] timers = new int[3]; //0 = left, 1 = right, 2 = back
+    private final boolean[] wasPressedLastFrame = new boolean[3];
 
     @SubscribeEvent
     public void onPlayerTick(TickEvent.PlayerTickEvent event) {

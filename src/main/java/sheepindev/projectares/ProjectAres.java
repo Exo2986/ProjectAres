@@ -40,7 +40,6 @@ public class ProjectAres {
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new PerkEventHandler());
         MinecraftForge.EVENT_BUS.register(new EternalPerkEventHandler());
-        MinecraftForge.EVENT_BUS.register(new EvasionPerkEventHandlerClient());
         MinecraftForge.EVENT_BUS.register(RegisterCommands.class);
     }
 
@@ -49,5 +48,7 @@ public class ProjectAres {
         ArgumentTypes.register("perk", PerkArgument.class, new ArgumentSerializer<>(PerkArgument::perk));
     }
 
-    private void clientSetup(final FMLClientSetupEvent event) {}
+    private void clientSetup(final FMLClientSetupEvent event) {
+        MinecraftForge.EVENT_BUS.register(new EvasionPerkEventHandlerClient());
+    }
 }
