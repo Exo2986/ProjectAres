@@ -59,5 +59,6 @@ public class RegisterPerks {
         registry.register(new SurroundedPerk()      .setRegistryName("surrounded"));
         registry.register(new EvasionPerk()         .setRegistryName("evasion"));
         registry.register(new VortexStrikePerk()    .setRegistryName("vortex_strike"));
+        registry.register(new CriticalSpecPerk()    .setRegistryName("critical_spec"));
     }
 }

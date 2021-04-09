@@ -18,5 +18,6 @@
   "projectares.perk.adrenaline_rush"        : "Adrenaline Rush",
   "projectares.perk.surrounded"             : "Surrounded",
   "projectares.perk.evasion"                : "Evasion",
-  "projectares.perk.vortex_strike"          : "Vortex Strike"
+  "projectares.perk.vortex_strike"          : "Vortex Strike",
+  "projectares.perk.critical_spec"          : "Critical Spec"
 }
