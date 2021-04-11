@@ -61,5 +61,6 @@ public class RegisterPerks {
         registry.register(new VortexStrikePerk()    .setRegistryName("vortex_strike"));
         registry.register(new CriticalSpecPerk()    .setRegistryName("critical_spec"));
         registry.register(new ConfusionPerk()       .setRegistryName("confusion"));
+        registry.register(new MagneticPerk()        .setRegistryName("magnetic"));
     }
 }
