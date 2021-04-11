@@ -25,5 +25,6 @@
   "projectares.perk.critical_spec"          : "Critical Spec",
   "projectares.perk.confusion"              : "Confusion",
   "projectares.perk.magnetic"               : "Magnetic",
-  "projectares.perk.holy_fire"              : "Holy Fire"
+  "projectares.perk.holy_fire"              : "Holy Fire",
+  "projectares.perk.copper_coating"         : "Copper Coating"
 }
