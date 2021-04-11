@@ -23,7 +23,6 @@ public class HolyFireEffect extends Effect {
 
     @Override
     public void performEffect (@Nonnull LivingEntity target, int amplifier) {
-        System.out.println("performing");
         target.setFire(1);
         AxisAlignedBB aabb = target.getBoundingBox().grow(3);
 
@@ -47,7 +46,6 @@ public class HolyFireEffect extends Effect {
 
     @Override
     public void removeAttributesModifiersFromEntity(LivingEntity entity, AttributeModifierManager attributeMapIn, int amplifier) {
-        System.out.println("leaving bye bye");
         entity.addPotionEffect(new EffectInstance(RegisterEffects.HOLY_FIRE_COOLDOWN_EFFECT.get(), 6*20, 0, false, false));
     }
 }
