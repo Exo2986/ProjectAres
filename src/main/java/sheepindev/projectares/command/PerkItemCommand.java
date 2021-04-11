@@ -30,7 +30,7 @@ public class PerkItemCommand {
     }
 
     private static int giveItem(CommandSource source, Perk perk1, Perk perk2) throws CommandSyntaxException {
-        PerkItem item = (PerkItem) ForgeRegistries.ITEMS.getValue(prefix("perk_item_test"));
+        PerkItem item = (PerkItem) ForgeRegistries.ITEMS.getValue(prefix("dungeon_sword"));
         if (item == null) {
             return 0;
         }
