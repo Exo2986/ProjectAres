@@ -32,9 +32,9 @@ public class VortexStrikePerk extends Perk {
             PlayerEntity player = event.getPlayer();
             Entity target = event.getTarget();
 
-            AxisAlignedBB aabb = event.getTarget().getBoundingBox().grow(1);
+            AxisAlignedBB aabb = target.getBoundingBox().grow(1);
 
-            List<Entity> entities = player.world.getEntitiesInAABBexcluding(event.getTarget(), aabb,
+            List<Entity> entities = player.world.getEntitiesInAABBexcluding(target, aabb,
                     (e) -> e instanceof LivingEntity &&
                             e.getEntityId() != player.getEntityId());
 
