@@ -1,6 +1,8 @@
 package sheepindev.projectares.perk;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.MetaParticle;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -25,7 +27,7 @@ public class VortexStrikePerk extends Perk {
     public void onCrit(ItemStack item, CriticalHitEvent event) {
         if (event.getEntity().world.isRemote()) { //client
             Entity target = event.getTarget();
-            emitParticles(target.getPositionVec(), target.world);
+            new DoParticles((ClientWorld) target.world, target.getPositionVec());
         } else { //server
             PlayerEntity player = event.getPlayer();
             Entity target = event.getTarget();
@@ -44,35 +46,40 @@ public class VortexStrikePerk extends Perk {
         }
     }
 
-    private static final double RADIUS = 1;
-    private static final int SLICES = 16;
-    private static final double YSTEP = 0.05;
+    private class DoParticles {
+        private static final double RADIUS = 1;
+        private static final int SLICES = 16;
+        private static final double YSTEP = 0.05;
 
-    @OnlyIn(Dist.CLIENT)
-    private void emitParticles(Vector3d position, World world) {
-        double slice = 2 * Math.PI / 16;
+        protected DoParticles(ClientWorld world, Vector3d pos) {
+            emitParticles(pos, world);
+        }
 
-        Vector3d prevPoint = new Vector3d(
-                position.x + (RADIUS * Math.cos(-slice)),
-                position.y+1,
-                position.z + (RADIUS * Math.sin(-slice)));
+        @OnlyIn(Dist.CLIENT)
+        private void emitParticles(Vector3d position, World world) {
+            double slice = 2 * Math.PI / 16;
 
-        double y = position.y+0.75;
+            Vector3d prevPoint = new Vector3d(
+                    position.x + (RADIUS * Math.cos(-slice)),
+                    position.y+1,
+                    position.z + (RADIUS * Math.sin(-slice)));
 
-        for (int i = 0; i < SLICES; i++) {
+            double y = position.y+0.75;
 
-            double prev = slice * (i-1); //will -1 work??
-            double angle = slice * i;
+            for (int i = 0; i < SLICES; i++) {
 
-            Vector3d pointOnCircle = new Vector3d(
-                    position.x + (RADIUS * Math.cos(angle)),
-                    y,
-                    position.z + (RADIUS * Math.sin(angle)));
+                double angle = slice * i;
 
-            world.addParticle(ParticleTypes.CLOUD, pointOnCircle.x, pointOnCircle.y, pointOnCircle.z, (pointOnCircle.x - prevPoint.x)/2, YSTEP, (pointOnCircle.z - prevPoint.z)/2);
+                Vector3d pointOnCircle = new Vector3d(
+                        position.x + (RADIUS * Math.cos(angle)),
+                        y,
+                        position.z + (RADIUS * Math.sin(angle)));
 
-            prevPoint = pointOnCircle;
-            y+=YSTEP;
+                world.addParticle(ParticleTypes.CLOUD, pointOnCircle.x, pointOnCircle.y, pointOnCircle.z, (pointOnCircle.x - prevPoint.x)/2, YSTEP, (pointOnCircle.z - prevPoint.z)/2);
+
+                prevPoint = pointOnCircle;
+                y+=YSTEP;
+            }
         }
     }
 }
