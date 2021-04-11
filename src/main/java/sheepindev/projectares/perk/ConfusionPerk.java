@@ -4,6 +4,7 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particles.ParticleTypes;
@@ -33,7 +34,7 @@ public class ConfusionPerk extends Perk {
             AxisAlignedBB aabb = target.getBoundingBox().grow(3);
 
             List<Entity> entities = player.world.getEntitiesInAABBexcluding(target, aabb,
-                    (e) -> e instanceof CreatureEntity &&
+                    (e) -> e instanceof MonsterEntity &&
                             e.getEntityId() != player.getEntityId());
 
             Random random = new Random();

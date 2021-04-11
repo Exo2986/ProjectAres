@@ -5,6 +5,8 @@
   "effect.projectares.rampage"              : "Rampage",
   "effect.projectares.thrill_of_the_kill"   : "Thrill of the Kill",
   "effect.projectares.adrenaline_rush"      : "Adrenaline Rush",
+  "effect.projectares.holy_fire"            : "Holy Fire",
+  "effect.projectares.holy_fire_cooldown"   : "Holy Fire Cooldown",
 
   "projectares.perk.unknown"                : "Unknown perk: %s",
 
@@ -22,5 +24,6 @@
   "projectares.perk.vortex_strike"          : "Vortex Strike",
   "projectares.perk.critical_spec"          : "Critical Spec",
   "projectares.perk.confusion"              : "Confusion",
-  "projectares.perk.magnetic"               : "Magnetic"
+  "projectares.perk.magnetic"               : "Magnetic",
+  "projectares.perk.holy_fire"              : "Holy Fire"
 }
