@@ -33,7 +33,9 @@ public class HolyFireEffect extends Effect {
             MonsterEntity monster = (MonsterEntity) entity;
 
             if (monster.getActivePotionEffect(RegisterEffects.HOLY_FIRE_EFFECT.get()) == null &&
-                    monster.getActivePotionEffect(RegisterEffects.HOLY_FIRE_COOLDOWN_EFFECT.get()) == null)
+                    monster.getActivePotionEffect(RegisterEffects.HOLY_FIRE_COOLDOWN_EFFECT.get()) == null
+                    && !(monster.world.isRaining() || monster.world.isThundering())
+                    && !monster.isSwimming())
                 monster.addPotionEffect(new EffectInstance(RegisterEffects.HOLY_FIRE_EFFECT.get(), 5 * 20, amplifier, false, false));
 
         }

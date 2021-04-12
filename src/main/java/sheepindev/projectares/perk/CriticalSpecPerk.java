@@ -18,7 +18,7 @@ public class CriticalSpecPerk extends Perk {
     private final HashMap<Integer, Long> playerCooldowns = new HashMap<>();
 
     @Override
-    public void onHit(ItemStack item, LivingDamageEvent event) { //this is so hacky
+    public void onHit(ItemStack item, LivingDamageEvent event) {
         if (event.getEntity().world.isRemote()) return;
         if (event.getSource().getTrueSource() != null && event.getSource().getTrueSource() instanceof PlayerEntity) {
             PlayerEntity owner = (PlayerEntity) event.getSource().getTrueSource();
@@ -33,7 +33,7 @@ public class CriticalSpecPerk extends Perk {
             owner.world.playSound(null, owner.getPosX(), owner.getPosY(), owner.getPosZ(), SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, owner.getSoundCategory(), 1.0F, 1.0F);
             owner.onCriticalHit(target);
 
-            CriticalHitEvent hitResult = new CriticalHitEvent(owner, target, 1.15f, false); //i feel like i should apologize for this
+            CriticalHitEvent hitResult = new CriticalHitEvent(owner, target, 1.15f, false);
             MinecraftForge.EVENT_BUS.post(hitResult);
         }
     }

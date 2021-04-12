@@ -27,8 +27,12 @@ public class HolyFirePerk extends Perk {
             MonsterEntity target = (MonsterEntity) event.getEntity();
 
             if (target.getActivePotionEffect(RegisterEffects.HOLY_FIRE_EFFECT.get()) == null &&
-                    target.getActivePotionEffect(RegisterEffects.HOLY_FIRE_COOLDOWN_EFFECT.get()) == null)
+                    target.getActivePotionEffect(RegisterEffects.HOLY_FIRE_COOLDOWN_EFFECT.get()) == null
+                    && !(target.world.isRaining() || target.world.isThundering())
+                    && !target.isSwimming()) {
+                System.out.println("holy fire");
                 target.addPotionEffect(new EffectInstance(RegisterEffects.HOLY_FIRE_EFFECT.get(), 5 * 20, 0, false, false));
+            }
         }
     }
 }
