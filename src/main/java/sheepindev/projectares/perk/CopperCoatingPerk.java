@@ -26,6 +26,8 @@ public class CopperCoatingPerk extends Perk {
     public void onCrit(ItemStack item, CriticalHitEvent event) {
         if (event.getEntity().world.isRemote()) return;
 
+        System.out.println(event.getTarget().getEntityWorld().getGameTime());
+
         if (event.getPlayer() != null) {
             PlayerEntity player = event.getPlayer();
             Entity target = event.getTarget();
