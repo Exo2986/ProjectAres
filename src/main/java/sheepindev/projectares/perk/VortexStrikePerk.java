@@ -19,9 +19,12 @@ import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import net.minecraftforge.fml.DistExecutor;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class VortexStrikePerk extends Perk {
+
+    private final HashMap<Integer, Long> playerCooldowns = new HashMap<>();
 
     @Override
     public void onCrit(ItemStack item, CriticalHitEvent event) {
@@ -32,7 +35,10 @@ public class VortexStrikePerk extends Perk {
             PlayerEntity player = event.getPlayer();
             Entity target = event.getTarget();
 
-            AxisAlignedBB aabb = target.getBoundingBox().grow(1);
+            if (playerCooldowns.containsKey(player.getEntityId())
+                    && playerCooldowns.get(player.getEntityId()) == player.world.getGameTime()) return;
+
+            AxisAlignedBB aabb = target.getBoundingBox().grow(2);
 
             List<Entity> entities = player.world.getEntitiesInAABBexcluding(target, aabb,
                     (e) -> e instanceof LivingEntity &&
@@ -43,6 +49,8 @@ public class VortexStrikePerk extends Perk {
             for (Entity entity : entities) {
                 player.attackTargetEntityWithCurrentItem(entity);
             }
+
+            playerCooldowns.put(player.getEntityId(), player.world.getGameTime());
         }
     }
 
@@ -57,7 +65,7 @@ public class VortexStrikePerk extends Perk {
 
         @OnlyIn(Dist.CLIENT)
         private void emitParticles(Vector3d position, World world) {
-            double slice = 2 * Math.PI / 16;
+            double slice = 2 * Math.PI / SLICES;
 
             Vector3d prevPoint = new Vector3d(
                     position.x + (RADIUS * Math.cos(-slice)),
