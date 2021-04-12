@@ -8,8 +8,12 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
+import net.minecraftforge.eventbus.api.Event;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import sheepindev.projectares.item.PerkItem;
+
+import static sheepindev.projectares.util.RegistryHelper.prefix;
 
 public class PerkEventHandler {
     @SubscribeEvent
@@ -76,7 +80,6 @@ public class PerkEventHandler {
 
     @SubscribeEvent
     public void onCriticalHit(CriticalHitEvent event) {
-        if (!event.isVanillaCritical()) return;
         Entity owner = event.getEntity();
 
         for (ItemStack itemStack : owner.getHeldEquipment()) {

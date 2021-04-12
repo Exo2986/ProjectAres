@@ -11,7 +11,11 @@ import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import net.minecraftforge.eventbus.api.Event;
 
+import java.util.HashMap;
+
 public class CriticalSpecPerk extends Perk {
+
+    private final HashMap<Integer, Long> playerCooldowns = new HashMap<>();
 
     @Override
     public void onHit(ItemStack item, LivingDamageEvent event) { //this is so hacky
@@ -21,21 +25,23 @@ public class CriticalSpecPerk extends Perk {
 
             LivingEntity target = event.getEntityLiving();
 
-            //this part is copied from vanilla don't blame me
-            float f2 = owner.getCooledAttackStrength(0.5F);
-            boolean flag = f2 > 0.9f;
-            boolean flag2 = flag && owner.fallDistance > 0.0F && !owner.isOnGround() && !owner.isOnLadder() && !owner.isInWater() && !owner.isPotionActive(Effects.BLINDNESS) && !owner.isPassenger() && target != null;
-            flag2 = flag2 && !owner.isSprinting();
-
-            if (flag2) return;
+            if (playerCooldowns.containsKey(owner.getEntityId())
+                    && playerCooldowns.get(owner.getEntityId()) == owner.world.getGameTime()) return; //prevent double crit
 
             event.setAmount(event.getAmount() * 1.15f);
 
             owner.world.playSound(null, owner.getPosX(), owner.getPosY(), owner.getPosZ(), SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, owner.getSoundCategory(), 1.0F, 1.0F);
             owner.onCriticalHit(target);
 
-            CriticalHitEvent hitResult = new CriticalHitEvent(owner, target, 1.15f, true); //i feel like i should apologize for this
+            CriticalHitEvent hitResult = new CriticalHitEvent(owner, target, 1.15f, false); //i feel like i should apologize for this
             MinecraftForge.EVENT_BUS.post(hitResult);
+        }
+    }
+
+    @Override
+    public void onCrit(ItemStack item, CriticalHitEvent event) {
+        if (event.getPlayer() != null) {
+            playerCooldowns.put(event.getPlayer().getEntityId(), event.getPlayer().world.getGameTime());
         }
     }
 }
