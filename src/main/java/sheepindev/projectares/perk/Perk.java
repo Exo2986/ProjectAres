@@ -29,5 +29,9 @@ public class Perk extends ForgeRegistryEntry<Perk> {
 
     public void onSwing(ItemStack item, Entity owner) {}
 
+    public boolean shouldShowDurabilityBar(ItemStack item) { return false; }
+
+    public double getDurability(ItemStack item) { return 0; }
+
     public AbstractMap.SimpleEntry<Attribute,AttributeModifier> getAttributeModifiers(ItemStack item) { return null; }
 }

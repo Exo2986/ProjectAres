@@ -2,6 +2,7 @@ package sheepindev.projectares.item;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import com.google.common.util.concurrent.AtomicDouble;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -31,10 +32,11 @@ import sheepindev.projectares.registry.RegisterPerks;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
 import static sheepindev.projectares.registry.RegisterPerks.getRegisteredPerk;
-import static sheepindev.projectares.util.RegistryHelper.prefix;
 
 public class PerkItem extends Item {
     public static final String NBT_TAG_NAME_PERK_LIST = "perks_list";
@@ -170,12 +172,7 @@ public class PerkItem extends Item {
     public @Nonnull ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, @Nonnull Hand hand) {
         ItemStack stack = player.getHeldItemMainhand();
 
-        if (world.isRemote()) return ActionResult.resultPass(stack);
-
         firePerkEvent(stack, (a) -> a.onRightClick(stack, player));
-
-        randomizePerk(stack);
-        randomizePerk(stack);
 
         return ActionResult.resultPass(stack);
     }
@@ -197,5 +194,28 @@ public class PerkItem extends Item {
             if (name == null) return;
             tooltip.add(new TranslationTextComponent(ProjectAres.MOD_ID + ".perk." + name.getPath()).mergeStyle(TextFormatting.GOLD));
         });
+    }
+
+    @Override
+    public boolean showDurabilityBar(ItemStack stack)
+    {
+        AtomicBoolean value = new AtomicBoolean();
+        value.set(false);
+        firePerkEvent(stack, (a) -> {
+            value.set(a.shouldShowDurabilityBar(stack) || value.get());
+        });
+        return value.get();
+    }
+
+    @Override
+    public double getDurabilityForDisplay(ItemStack stack)
+    {
+        AtomicDouble value = new AtomicDouble();
+        firePerkEvent(stack, (a) -> {
+            value.addAndGet(a.getDurability(stack));
+        });
+
+        System.out.println(value.get());
+        return value.get();
     }
 }

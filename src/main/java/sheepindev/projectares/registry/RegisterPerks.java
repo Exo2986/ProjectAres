@@ -64,5 +64,6 @@ public class RegisterPerks {
         registry.register(new MagneticPerk()        .setRegistryName("magnetic"));
         registry.register(new HolyFirePerk()        .setRegistryName("holy_fire"));
         registry.register(new CopperCoatingPerk()   .setRegistryName("copper_coating"));
+        registry.register(new SoulCapacitorPerk()   .setRegistryName("soul_capacitor"));
     }
 }
