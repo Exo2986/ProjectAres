@@ -214,8 +214,6 @@ public class PerkItem extends Item {
         firePerkEvent(stack, (a) -> {
             value.addAndGet(a.getDurability(stack));
         });
-
-        System.out.println(value.get());
         return value.get();
     }
 }

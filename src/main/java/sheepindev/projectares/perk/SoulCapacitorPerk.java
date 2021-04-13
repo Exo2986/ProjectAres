@@ -83,16 +83,4 @@ public class SoulCapacitorPerk extends Perk {
     public double getDurability(ItemStack item) {
         return Math.max(1 - item.getOrCreateTag().getFloat(NBT_TAG_NAME_SOUL_CAPACITOR_CHARGE), 0);
     }
-
-//    @Override
-//    public int onGetDamage(ItemStack item) {
-//        System.out.println((item.getOrCreateTag().getFloat(NBT_TAG_NAME_SOUL_CAPACITOR_CHARGE) * 100));
-//        return (int) (item.getOrCreateTag().getFloat(NBT_TAG_NAME_SOUL_CAPACITOR_CHARGE) * 100);
-//    }
-//
-//    @Override
-//    public int onGetMaxDamage(ItemStack item) {
-//        System.out.println("aa");
-//        return 100;
-//    }
 }

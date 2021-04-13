@@ -9,6 +9,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import sheepindev.projectares.ProjectAres;
 import sheepindev.projectares.potion.BasicEffect;
+import sheepindev.projectares.potion.FreezingEffect;
 import sheepindev.projectares.potion.HolyFireEffect;
 import sheepindev.projectares.potion.RampageEffect;
 
@@ -22,6 +23,9 @@ public class RegisterEffects {
 
     public static final RegistryObject<Effect> HOLY_FIRE_EFFECT = EFFECTS.register("holy_fire", () ->
             new HolyFireEffect(EffectType.HARMFUL, 9643043));
+
+    public static final RegistryObject<Effect> FREEZING_EFFECT = EFFECTS.register("freezing", () ->
+            new FreezingEffect(EffectType.HARMFUL, 9643043));
 
     public static final RegistryObject<Effect> HOLY_FIRE_COOLDOWN_EFFECT = EFFECTS.register("holy_fire_cooldown", () ->
             new BasicEffect(EffectType.NEUTRAL, 9643043));

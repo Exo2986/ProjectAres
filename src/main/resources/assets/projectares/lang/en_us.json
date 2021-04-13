@@ -7,6 +7,7 @@
   "effect.projectares.adrenaline_rush"      : "Adrenaline Rush",
   "effect.projectares.holy_fire"            : "Holy Fire",
   "effect.projectares.holy_fire_cooldown"   : "Holy Fire Cooldown",
+  "effect.projectares.freezing"             : "Freezing",
 
   "projectares.perk.unknown"                : "Unknown perk: %s",
 
@@ -27,5 +28,6 @@
   "projectares.perk.magnetic"               : "Magnetic",
   "projectares.perk.holy_fire"              : "Holy Fire",
   "projectares.perk.copper_coating"         : "Copper Coating",
-  "projectares.perk.soul_capacitor"         : "Soul Capacitor"
+  "projectares.perk.soul_capacitor"         : "Soul Capacitor",
+  "projectares.perk.freezing"               : "Freezing"
 }

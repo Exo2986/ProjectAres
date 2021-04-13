@@ -2,7 +2,6 @@ package sheepindev.projectares;
 
 import net.minecraft.command.arguments.ArgumentSerializer;
 import net.minecraft.command.arguments.ArgumentTypes;
-import net.minecraft.loot.LootFunctionType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -11,6 +10,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import sheepindev.projectares.particle.ParticleEmitter;
+import sheepindev.projectares.registry.RegisterParticleEmitters;
 import sheepindev.projectares.command.arguments.PerkArgument;
 import sheepindev.projectares.event.EvasionPerkEventHandlerClient;
 import sheepindev.projectares.event.loot.LootTableEventHandler;
@@ -35,6 +36,8 @@ public class ProjectAres {
         modBus.addListener(this::clientSetup);
         modBus.addListener(RegisterPerks::registerRegistry);
         modBus.addGenericListener(Perk.class, RegisterPerks::registerPerks);
+        modBus.addListener(RegisterParticleEmitters::registerRegistry);
+        modBus.addGenericListener(ParticleEmitter.class, RegisterParticleEmitters::registerEmitters);
 
         RegisterItems.ITEMS.register(modBus);
         RegisterEffects.EFFECTS.register(modBus);
@@ -52,6 +55,8 @@ public class ProjectAres {
     }
 
     private void clientSetup(final FMLClientSetupEvent event) {
+        IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
+
         MinecraftForge.EVENT_BUS.register(new EvasionPerkEventHandlerClient());
     }
 }

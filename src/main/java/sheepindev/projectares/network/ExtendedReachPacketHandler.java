@@ -35,6 +35,8 @@ public class ExtendedReachPacketHandler {
         }
 
         ctx.enqueueWork(() -> processMessage(message, player));
+
+        ctx.setPacketHandled(true);
     }
 
     private static void processMessage(ExtendedReachPacket message, ServerPlayerEntity player) {

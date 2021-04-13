@@ -38,6 +38,8 @@ public class EvasionPacketHandler {
         }
 
         ctx.enqueueWork(() -> processMessage(message, player));
+
+        ctx.setPacketHandled(true);
     }
 
     private static void processMessage(EvasionPacket message, ServerPlayerEntity player) {

@@ -20,9 +20,8 @@ public class RegisterPerks {
     public static IForgeRegistry<Perk> PERK_REGISTRY;
 
     public static void registerRegistry(RegistryEvent.NewRegistry event) {
-        System.out.println("Registering Perk registry!");
         PERK_REGISTRY = new RegistryBuilder<Perk>()
-                .setName(PERK_KEY.getRegistryName())
+                .setName(PERK_KEY.getLocation())
                 .setType(Perk.class)
                 .allowModification()
                 .create();
@@ -65,5 +64,6 @@ public class RegisterPerks {
         registry.register(new HolyFirePerk()        .setRegistryName("holy_fire"));
         registry.register(new CopperCoatingPerk()   .setRegistryName("copper_coating"));
         registry.register(new SoulCapacitorPerk()   .setRegistryName("soul_capacitor"));
+        registry.register(new FreezingPerk()        .setRegistryName("freezing"));
     }
 }
