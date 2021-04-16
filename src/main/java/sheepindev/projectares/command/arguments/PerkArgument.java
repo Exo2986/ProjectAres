@@ -22,10 +22,12 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.concurrent.CompletableFuture;
 
+import static sheepindev.projectares.util.ProjectAresConstants.MOD_ID;
+
 public class PerkArgument implements ArgumentType<Perk> {
     private static final Collection<String> EXAMPLES = Arrays.asList("rampage", "top_heavy");
     public static final DynamicCommandExceptionType PERK_UNKNOWN = new DynamicCommandExceptionType((perk) ->
-            new TranslationTextComponent(ProjectAres.MOD_ID + ".perk.unknown", perk));
+            new TranslationTextComponent(MOD_ID + ".perk.unknown", perk));
 
     public static PerkArgument perk () {
         return new PerkArgument();

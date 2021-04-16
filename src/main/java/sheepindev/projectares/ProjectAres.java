@@ -27,7 +27,6 @@ import sheepindev.projectares.event.PerkEventHandler;
 @Mod("projectares")
 public class ProjectAres {
     public static final Logger LOGGER = LogManager.getLogger();
-    public static final String MOD_ID = "projectares";
     public static ProjectAresPacketHandler PACKET_HANDLER;
 
     public ProjectAres() {

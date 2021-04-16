@@ -12,4 +12,14 @@ public class ProjectAresConstants {
 
     //Cooldowns
     public static final int COOLDOWN_FINAL_STAND = 6000; //5 minutes
+
+    //Strings
+    public static final String MOD_ID = "projectares";
+
+    //Networking
+    public static final String PROTOCOL_VERSION = "1";
+
+    public static final byte EXTENDED_REACH_PACKET_ID = 1;
+    public static final byte EVASION_PACKET_ID = 2;
+    public static final byte BASIC_PARTICLE_EMITTER_PACKET_ID = 3;
 }
