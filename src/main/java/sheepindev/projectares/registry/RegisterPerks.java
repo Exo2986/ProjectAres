@@ -67,5 +67,6 @@ public class RegisterPerks {
         registry.register(new FreezingPerk()        .setRegistryName("freezing"));
         registry.register(new FinalStandPerk()      .setRegistryName("final_stand"));
         registry.register(new ChorusImbuedPerk()    .setRegistryName("chorus_imbued"));
+        registry.register(new KillingWindPerk()     .setRegistryName("killing_wind"));
     }
 }
