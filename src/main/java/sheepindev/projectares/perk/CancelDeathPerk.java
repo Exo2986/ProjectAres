@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import sheepindev.projectares.enums.PerkCompatibilityEnum;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class CancelDeathPerk extends Perk {
@@ -56,5 +57,12 @@ public class CancelDeathPerk extends Perk {
             return 1 - normalized;
         }
         return 1;
+    }
+
+    @Override
+    public void populateCompatible() {
+        super.populateCompatible();
+        this.compatibilityTags.add(PerkCompatibilityEnum.UsesDurabilityBarIncompatible);
+        super.doCompatabilityTagChecks();
     }
 }

@@ -6,6 +6,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import sheepindev.projectares.registry.RegisterEffects;
+import sheepindev.projectares.registry.RegisterPerks;
+
+import java.util.Arrays;
+
+import static sheepindev.projectares.util.RegistryHelper.prefix;
 
 public class FreezingPerk extends ApplyEffectPerk {
     @Override
@@ -24,5 +29,11 @@ public class FreezingPerk extends ApplyEffectPerk {
 
             applyOrAmplifyEffect(RegisterEffects.FREEZING_EFFECT.get(), target);
         }
+    }
+
+    @Override
+    public void populateCompatible() {
+        super.populateCompatible();
+        compatiblePerks.remove(RegisterPerks.getRegisteredPerk(prefix("holy_fire")));
     }
 }

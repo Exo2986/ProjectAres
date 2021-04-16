@@ -8,10 +8,55 @@ import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import net.minecraftforge.registries.ForgeRegistryEntry;
+import sheepindev.projectares.enums.PerkCompatibilityEnum;
+import sheepindev.projectares.registry.RegisterEffects;
+import sheepindev.projectares.registry.RegisterPerks;
 
 import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Perk extends ForgeRegistryEntry<Perk> {
+    protected ArrayList<PerkCompatibilityEnum> compatibilityTags;
+    protected ArrayList<Perk> compatiblePerks;
+
+    protected void instantiateIfNeeded() {
+        if (compatiblePerks == null) {
+            compatiblePerks = new ArrayList<>();
+            compatibilityTags = new ArrayList<>();
+            populateCompatible();
+        }
+    }
+
+    public ArrayList<Perk> getCompatiblePerks() {
+        instantiateIfNeeded();
+        return compatiblePerks;
+    }
+
+    public ArrayList<PerkCompatibilityEnum> getCompatibilityTags() {
+        instantiateIfNeeded();
+        return compatibilityTags;
+    }
+
+    public void populateCompatible() {
+        this.compatiblePerks.addAll(Arrays.asList(RegisterPerks.getRegisteredPerks()));
+        this.compatiblePerks.remove(RegisterPerks.getRegisteredPerk(this.getRegistryName()));
+    }
+
+    public void doCompatabilityTagChecks() {
+        compatiblePerks.removeIf((perk) -> {
+            AtomicBoolean match = new AtomicBoolean(false);
+            ArrayList<PerkCompatibilityEnum> tags = perk.getCompatibilityTags();
+
+            getCompatibilityTags().forEach((tag) -> {
+                if (tags.contains(tag)) {
+                    match.set(true);
+                }
+            });
+            return match.get();
+        });
+    }
 
     public void onTick(ItemStack item, Entity owner) {}
 

@@ -11,8 +11,10 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import sheepindev.projectares.enums.PerkCompatibilityEnum;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import static sheepindev.projectares.util.ProjectAresConstants.NBT_TAG_NAME_SOUL_CAPACITOR_CHARGE;
 
@@ -78,5 +80,13 @@ public class SoulCapacitorPerk extends Perk {
     @Override
     public double getDurability(ItemStack item) {
         return Math.max(1 - item.getOrCreateTag().getFloat(NBT_TAG_NAME_SOUL_CAPACITOR_CHARGE), 0);
+    }
+
+    @Override
+    public void populateCompatible() {
+        super.populateCompatible();
+        this.compatibilityTags.add(PerkCompatibilityEnum.UsesDurabilityBarIncompatible);
+        this.compatibilityTags.add(PerkCompatibilityEnum.OnRightClickIncompatible);
+        super.doCompatabilityTagChecks();
     }
 }

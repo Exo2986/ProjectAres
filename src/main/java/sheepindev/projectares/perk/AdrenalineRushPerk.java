@@ -6,6 +6,10 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import sheepindev.projectares.registry.RegisterEffects;
+import sheepindev.projectares.registry.RegisterPerks;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class AdrenalineRushPerk extends Perk{
 

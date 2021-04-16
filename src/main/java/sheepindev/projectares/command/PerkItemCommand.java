@@ -12,6 +12,7 @@ import sheepindev.projectares.command.arguments.PerkArgument;
 import sheepindev.projectares.item.PerkItem;
 import sheepindev.projectares.perk.Perk;
 import sheepindev.projectares.registry.RegisterPerks;
+import sheepindev.projectares.util.SwordRollHelper;
 
 import static sheepindev.projectares.util.RegistryHelper.prefix;
 
@@ -29,24 +30,18 @@ public class PerkItemCommand {
         dispatcher.register(command);
     }
 
-    private static int giveItem(CommandSource source, Perk perk1, Perk perk2) throws CommandSyntaxException {
+    private static int giveItem(CommandSource source, Perk perk1, Perk perk2) {
         PerkItem item = (PerkItem) ForgeRegistries.ITEMS.getValue(prefix("dungeon_sword"));
         if (item == null) {
             return 0;
         }
-        ItemStack stack = new ItemStack(item);
+        ItemStack stack = SwordRollHelper.getRolledItem(item);
 
-        if (perk1 == null)
-            item.randomizePerk(stack);
-        else
-            item.addPerk(stack, perk1);
-
-        if (perk2 == null)
-            item.randomizePerk(stack);
-        else
-            item.addPerk(stack, perk2);
-
-        source.asPlayer().addItemStackToInventory(stack);
+        try {
+            source.asPlayer().addItemStackToInventory(stack);
+        } catch (CommandSyntaxException e) {
+            e.printStackTrace();
+        }
         return 1;
     }
 }
