@@ -8,6 +8,8 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
@@ -28,6 +30,8 @@ public class FinalStandPerk extends Perk {
             event.setCanceled(true);
             living.setHealth(1);
             living.addPotionEffect(new EffectInstance(Effects.REGENERATION, 20*3, 3));
+
+            living.world.playSound(null, living.getPosX(), living.getPosY(), living.getPosZ(), SoundEvents.BLOCK_BEACON_ACTIVATE, SoundCategory.PLAYERS, 1f, 1.3F);
 
             nbt.putLong(NBT_TAG_NAME_FINAL_STAND_COOLDOWN, owner.world.getGameTime());
             item.write(nbt);
