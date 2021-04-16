@@ -7,7 +7,11 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import sheepindev.projectares.registry.RegisterEffects;
 
-public class FreezingPerk extends Perk {
+public class FreezingPerk extends ApplyEffectPerk {
+    @Override
+    protected int getEffectDuration () {
+        return 5*20;
+    }
 
     @Override
     public void onHit(ItemStack item, LivingDamageEvent event) {
@@ -16,18 +20,9 @@ public class FreezingPerk extends Perk {
         if (event.getSource() != null && event.getSource().getTrueSource() != null
                 && event.getSource().getTrueSource() instanceof PlayerEntity
                 && event.getEntity() instanceof MonsterEntity) {
-            PlayerEntity player = (PlayerEntity) event.getSource().getTrueSource();
             MonsterEntity target = (MonsterEntity) event.getEntity();
 
-            int amplifier = 0;
-
-            EffectInstance activeEffect = target.getActivePotionEffect(RegisterEffects.FREEZING_EFFECT.get());
-            if (activeEffect != null) {
-                amplifier = activeEffect.getAmplifier()+1;
-                target.removePotionEffect(activeEffect.getPotion());
-            }
-
-            target.addPotionEffect(new EffectInstance(RegisterEffects.FREEZING_EFFECT.get(), 5 * 20, amplifier, false, false));
+            applyOrAmplifyEffect(RegisterEffects.FREEZING_EFFECT.get(), target);
         }
     }
 }

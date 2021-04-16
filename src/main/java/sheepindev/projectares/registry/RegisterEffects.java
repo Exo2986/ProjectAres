@@ -37,4 +37,7 @@ public class RegisterEffects {
 
     public static final RegistryObject<Effect> ADRENALINE_RUSH_EFFECT = EFFECTS.register("adrenaline_rush", () ->
             new BasicEffect(EffectType.BENEFICIAL, 9643043).addAttributesModifier(Attributes.ATTACK_SPEED, String.valueOf(UUID.randomUUID()), 0.3F, AttributeModifier.Operation.MULTIPLY_TOTAL));
+
+    public static final RegistryObject<Effect> KILLING_WIND_EFFECT = EFFECTS.register("killing_wind", () ->
+            new BasicEffect(EffectType.BENEFICIAL, 9643043).addAttributesModifier(Attributes.MOVEMENT_SPEED, String.valueOf(UUID.randomUUID()), 0.2F, AttributeModifier.Operation.MULTIPLY_TOTAL));
 }

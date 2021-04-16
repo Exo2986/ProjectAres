@@ -8,6 +8,7 @@
   "effect.projectares.holy_fire"            : "Holy Fire",
   "effect.projectares.holy_fire_cooldown"   : "Holy Fire Cooldown",
   "effect.projectares.freezing"             : "Freezing",
+  "effect.projectares.killing_wind"         : "Killing Wind",
 
   "projectares.perk.unknown"                : "Unknown perk: %s",
 
