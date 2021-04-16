@@ -7,14 +7,13 @@ import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.ObjectHolder;
 import sheepindev.projectares.ProjectAres;
-import sheepindev.projectares.item.DungeonSwordPerkItem;
 
-import java.util.List;
+import static sheepindev.projectares.util.ProjectAresConstants.MOD_ID;
 
 public class LootTableEventHandler {
     public static int dungeonSwordWeight = 7;
 
-    @ObjectHolder(ProjectAres.MOD_ID + ":dungeon_sword")
+    @ObjectHolder(MOD_ID + ":dungeon_sword")
     public static final Item dungeonSword = null;
 
     public static LootFunctionType SET_PERKS;

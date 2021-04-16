@@ -15,8 +15,10 @@ import sheepindev.projectares.potion.RampageEffect;
 
 import java.util.UUID;
 
+import static sheepindev.projectares.util.ProjectAresConstants.MOD_ID;
+
 public class RegisterEffects {
-    public static final DeferredRegister<Effect> EFFECTS = DeferredRegister.create(ForgeRegistries.POTIONS, ProjectAres.MOD_ID);
+    public static final DeferredRegister<Effect> EFFECTS = DeferredRegister.create(ForgeRegistries.POTIONS, MOD_ID);
 
     public static final RegistryObject<Effect> RAMPAGE_EFFECT = EFFECTS.register("rampage", () ->
             new RampageEffect(EffectType.BENEFICIAL, 9643043, 1.1D).addAttributesModifier(Attributes.ATTACK_DAMAGE, String.valueOf(UUID.randomUUID()), 0.0D, AttributeModifier.Operation.ADDITION));

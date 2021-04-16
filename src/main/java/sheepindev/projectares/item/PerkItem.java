@@ -25,7 +25,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.util.Constants;
-import sheepindev.projectares.ProjectAres;
 import sheepindev.projectares.perk.Perk;
 import sheepindev.projectares.registry.RegisterPerks;
 
@@ -37,6 +36,7 @@ import java.util.function.Consumer;
 
 import static sheepindev.projectares.registry.RegisterPerks.getRegisteredPerk;
 import static sheepindev.projectares.util.ProjectAresConstants.*;
+import static sheepindev.projectares.util.ProjectAresConstants.MOD_ID;
 
 public class PerkItem extends Item {
 
@@ -189,7 +189,7 @@ public class PerkItem extends Item {
         Arrays.stream(getPerks(itemStack)).forEach((a) -> {
             ResourceLocation name = a.getRegistryName();
             if (name == null) return;
-            tooltip.add(new TranslationTextComponent(ProjectAres.MOD_ID + ".perk." + name.getPath()).mergeStyle(TextFormatting.GOLD));
+            tooltip.add(new TranslationTextComponent(MOD_ID + ".perk." + name.getPath()).mergeStyle(TextFormatting.GOLD));
         });
     }
 

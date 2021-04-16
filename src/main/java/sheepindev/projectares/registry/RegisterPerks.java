@@ -66,5 +66,6 @@ public class RegisterPerks {
         registry.register(new SoulCapacitorPerk()   .setRegistryName("soul_capacitor"));
         registry.register(new FreezingPerk()        .setRegistryName("freezing"));
         registry.register(new FinalStandPerk()      .setRegistryName("final_stand"));
+        registry.register(new ChorusImbuedPerk()    .setRegistryName("chorus_imbued"));
     }
 }

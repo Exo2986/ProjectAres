@@ -10,8 +10,11 @@ public class ProjectAresConstants {
 
     public static final String NBT_TAG_NAME_FINAL_STAND_COOLDOWN = "perk_final_stand_cooldown";
 
+    public static final String NBT_TAG_NAME_CHORUS_IMBUED_COOLDOWN = "perk_chorus_imbued_cooldown";
+
     //Cooldowns
     public static final int COOLDOWN_FINAL_STAND = 6000; //5 minutes
+    public static final int COOLDOWN_CHORUS_IMBUED = 3600; //3 minutes
 
     //Strings
     public static final String MOD_ID = "projectares";
