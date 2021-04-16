@@ -29,5 +29,6 @@
   "projectares.perk.holy_fire"              : "Holy Fire",
   "projectares.perk.copper_coating"         : "Copper Coating",
   "projectares.perk.soul_capacitor"         : "Soul Capacitor",
-  "projectares.perk.freezing"               : "Freezing"
+  "projectares.perk.freezing"               : "Freezing",
+  "projectares.perk.final_stand"            : "Final Stand"
 }

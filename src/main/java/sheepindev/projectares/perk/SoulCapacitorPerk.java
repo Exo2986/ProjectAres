@@ -1,8 +1,5 @@
 package sheepindev.projectares.perk;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.EmitterParticle;
-import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -13,14 +10,13 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
 import java.util.List;
 
+import static sheepindev.projectares.util.ProjectAresConstants.NBT_TAG_NAME_SOUL_CAPACITOR_CHARGE;
+
 public class SoulCapacitorPerk extends Perk {
-    public static final String NBT_TAG_NAME_SOUL_CAPACITOR_CHARGE = "perk_soul_capacitor_charge";
     public static final float CHARGE_AMOUNT = 0.25f;
 
     @Override

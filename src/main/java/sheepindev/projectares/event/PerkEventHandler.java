@@ -60,7 +60,7 @@ public class PerkEventHandler {
 
                 PerkItem item = (PerkItem) itemStack.getItem();
 
-                item.firePerkEvent(itemStack, (a) -> a.onOwnerDeath(itemStack, owner));
+                item.firePerkEvent(itemStack, (a) -> a.onOwnerDeath(itemStack, owner, event));
                 return;
             }
         }

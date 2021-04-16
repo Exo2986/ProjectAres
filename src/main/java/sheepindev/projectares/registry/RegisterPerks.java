@@ -65,5 +65,6 @@ public class RegisterPerks {
         registry.register(new CopperCoatingPerk()   .setRegistryName("copper_coating"));
         registry.register(new SoulCapacitorPerk()   .setRegistryName("soul_capacitor"));
         registry.register(new FreezingPerk()        .setRegistryName("freezing"));
+        registry.register(new FinalStandPerk()      .setRegistryName("final_stand"));
     }
 }

@@ -33,15 +33,12 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
 import static sheepindev.projectares.registry.RegisterPerks.getRegisteredPerk;
+import static sheepindev.projectares.util.ProjectAresConstants.*;
 
 public class PerkItem extends Item {
-    public static final String NBT_TAG_NAME_PERK_LIST = "perks_list";
-    public static final String NBT_TAG_NAME_PERK_COUNT = "num_perks";
-    public static final String NBT_TAG_NAME_PERK_KEY = "perk_id";
 
     protected int getMaxPerks() { return 2; }
 

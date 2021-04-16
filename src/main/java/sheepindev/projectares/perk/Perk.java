@@ -25,7 +25,7 @@ public class Perk extends ForgeRegistryEntry<Perk> {
 
     public void onRightClick(ItemStack item, Entity owner) {}
 
-    public void onOwnerDeath(ItemStack item, Entity owner) {}
+    public void onOwnerDeath(ItemStack item, Entity owner, LivingDeathEvent event) {}
 
     public void onSwing(ItemStack item, Entity owner) {}
 
