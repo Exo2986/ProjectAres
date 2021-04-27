@@ -68,5 +68,6 @@ public class RegisterPerks {
         registry.register(new FinalStandPerk()      .setRegistryName("final_stand"));
         registry.register(new ChorusImbuedPerk()    .setRegistryName("chorus_imbued"));
         registry.register(new KillingWindPerk()     .setRegistryName("killing_wind"));
+        registry.register(new MovingTargetPerk()    .setRegistryName("moving_target"));
     }
 }

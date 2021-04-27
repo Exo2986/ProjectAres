@@ -38,7 +38,6 @@ public class HolyFirePerk extends Perk {
                     target.getActivePotionEffect(RegisterEffects.HOLY_FIRE_COOLDOWN_EFFECT.get()) == null
                     && !(target.world.isRaining() || target.world.isThundering())
                     && !target.isSwimming()) {
-                System.out.println("holy fire");
                 target.addPotionEffect(new EffectInstance(effect, 5 * 20, 0, false, false));
             }
         }

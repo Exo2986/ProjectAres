@@ -40,4 +40,7 @@ public class RegisterEffects {
 
     public static final RegistryObject<Effect> KILLING_WIND_EFFECT = EFFECTS.register("killing_wind", () ->
             new BasicEffect(EffectType.BENEFICIAL, 9643043).addAttributesModifier(Attributes.MOVEMENT_SPEED, String.valueOf(UUID.randomUUID()), 0.2F, AttributeModifier.Operation.MULTIPLY_TOTAL));
+
+    public static final RegistryObject<Effect> MOVING_TARGET_EFFECT = EFFECTS.register("moving_target", () ->
+            new BasicEffect(EffectType.BENEFICIAL, 9643043).addAttributesModifier(Attributes.ATTACK_SPEED, String.valueOf(UUID.randomUUID()), 0.5F, AttributeModifier.Operation.MULTIPLY_BASE));
 }
