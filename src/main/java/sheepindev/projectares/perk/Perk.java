@@ -62,6 +62,8 @@ public class Perk extends ForgeRegistryEntry<Perk> {
 
     public void onKill(ItemStack item, LivingDeathEvent event) {} //Event.Entity is the target, not the owner
 
+    public void onIndirectKill(ItemStack item, LivingDeathEvent event) {}
+
     public void onOwnerDamage(ItemStack item, LivingDamageEvent event) {}
 
     public void onCrit(ItemStack item, CriticalHitEvent event) {}

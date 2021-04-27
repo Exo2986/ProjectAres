@@ -14,6 +14,9 @@ import sheepindev.projectares.perk.Perk;
 import sheepindev.projectares.registry.RegisterPerks;
 import sheepindev.projectares.util.SwordRollHelper;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import static sheepindev.projectares.util.RegistryHelper.prefix;
 
 public class PerkItemCommand {
@@ -35,7 +38,24 @@ public class PerkItemCommand {
         if (item == null) {
             return 0;
         }
-        ItemStack stack = SwordRollHelper.getRolledItem(item);
+        ItemStack stack;
+        if (perk2 == null) {
+            if (perk1 == null) {
+                stack = SwordRollHelper.getRolledItem(item);
+            } else {
+                stack = new ItemStack(item);
+                item.addPerk(stack, perk1);
+
+                Random random = new Random();
+                ArrayList<Perk> compatible = perk1.getCompatiblePerks();
+
+                item.addPerk(stack, compatible.get(random.nextInt(compatible.size())));
+            }
+        } else {
+            stack = new ItemStack(item);
+            item.addPerk(stack, perk1);
+            item.addPerk(stack, perk2);
+        }
 
         try {
             source.asPlayer().addItemStackToInventory(stack);

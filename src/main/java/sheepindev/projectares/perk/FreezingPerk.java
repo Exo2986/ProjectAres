@@ -1,10 +1,13 @@
 package sheepindev.projectares.perk;
 
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import sheepindev.projectares.potion.HostilePerkEffect;
 import sheepindev.projectares.registry.RegisterEffects;
 import sheepindev.projectares.registry.RegisterPerks;
 
@@ -27,7 +30,10 @@ public class FreezingPerk extends ApplyEffectPerk {
                 && event.getEntity() instanceof MonsterEntity) {
             MonsterEntity target = (MonsterEntity) event.getEntity();
 
-            applyOrAmplifyEffect(RegisterEffects.FREEZING_EFFECT.get(), target);
+            HostilePerkEffect effect = (HostilePerkEffect) RegisterEffects.FREEZING_EFFECT.get();
+            effect.setSourceEntity((LivingEntity) event.getSource().getTrueSource());
+
+            applyOrAmplifyEffect(effect, target);
         }
     }
 

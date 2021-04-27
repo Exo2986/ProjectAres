@@ -9,16 +9,24 @@ import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.EffectType;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import sheepindev.projectares.registry.RegisterEffects;
 
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class HolyFireEffect extends Effect {
+import static sheepindev.projectares.util.RegistryHelper.prefix;
+
+public class HolyFireEffect extends HostilePerkEffect {
 
     public HolyFireEffect(EffectType typeIn, int liquidColorIn) {
         super(typeIn, liquidColorIn);
+    }
+
+    @Override
+    public ResourceLocation getSourcePerk() {
+        return prefix("holy_fire");
     }
 
     @Override
@@ -28,6 +36,8 @@ public class HolyFireEffect extends Effect {
 
         List<Entity> entities = target.world.getEntitiesInAABBexcluding(target, aabb,
                 (e) -> e instanceof MonsterEntity);
+
+        this.checkIndirectDeathEvent(target, 0);
 
         for (Entity entity : entities) {
             MonsterEntity monster = (MonsterEntity) entity;

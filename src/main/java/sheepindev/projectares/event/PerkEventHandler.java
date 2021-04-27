@@ -65,17 +65,18 @@ public class PerkEventHandler {
             }
         }
 
-        if (event.getSource().getTrueSource() != null
-                && event.getSource().getTrueSource() instanceof LivingEntity) {
-            LivingEntity entity = (LivingEntity) event.getSource().getTrueSource();
+        if (event.getSource().getTrueSource() != null) {
+            if (event.getSource().getTrueSource() instanceof LivingEntity) {
+                LivingEntity entity = (LivingEntity) event.getSource().getTrueSource();
 
-            for (ItemStack itemStack : entity.getHeldEquipment()) {
-                if (itemStack.getItem() instanceof PerkItem) {
+                for (ItemStack itemStack : entity.getHeldEquipment()) {
+                    if (itemStack.getItem() instanceof PerkItem) {
 
-                    PerkItem item = (PerkItem) itemStack.getItem();
+                        PerkItem item = (PerkItem) itemStack.getItem();
 
-                    item.firePerkEvent(itemStack, (a) -> a.onKill(itemStack, event));
-                    return;
+                        item.firePerkEvent(itemStack, (a) -> a.onKill(itemStack, event));
+                        return;
+                    }
                 }
             }
         }

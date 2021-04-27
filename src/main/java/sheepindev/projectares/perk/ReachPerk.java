@@ -20,7 +20,7 @@ public class ReachPerk extends Perk{
 
         EntityRayTraceResult target = RayTracingHelper.entityRayTrace(owner, EXTENDED_REACH_DISTANCE);
         if (target != null) {
-            double distance = owner.getPositionVec().squareDistanceTo(target.getEntity().getPositionVec());
+            double distance = owner.getPositionVec().distanceTo(target.getEntity().getPositionVec());
             LOGGER.debug(distance);
 
             RayTraceResult mouseOver = Minecraft.getInstance().objectMouseOver;

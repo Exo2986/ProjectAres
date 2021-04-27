@@ -3,6 +3,8 @@ package sheepindev.projectares.perk;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.item.ExperienceOrbEntity;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -22,7 +24,7 @@ public class MagneticPerk extends Perk {
         AxisAlignedBB aabb = owner.getBoundingBox().grow(8);
 
         List<Entity> entities = owner.world.getEntitiesInAABBexcluding(owner, aabb,
-                (e) -> e instanceof MonsterEntity);
+                (e) -> e instanceof MonsterEntity || e instanceof ItemEntity || e instanceof ExperienceOrbEntity);
 
         for (Entity entity : entities) {
             Vector3d motion = owner.getPositionVec().normalize().subtract(entity.getPositionVec().normalize()).mul(2.4, 0, 2.4);

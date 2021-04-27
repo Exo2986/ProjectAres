@@ -10,6 +10,7 @@ import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.EffectType;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.fml.network.PacketDistributor;
 import sheepindev.projectares.network.ParticleEmitterPacket;
@@ -21,10 +22,15 @@ import java.util.List;
 
 import static sheepindev.projectares.util.RegistryHelper.prefix;
 
-public class FreezingEffect extends Effect {
+public class FreezingEffect extends HostilePerkEffect {
 
     public FreezingEffect(EffectType typeIn, int liquidColorIn) {
         super(typeIn, liquidColorIn);
+    }
+
+    @Override
+    public ResourceLocation getSourcePerk() {
+        return prefix("freezing");
     }
 
     @Override
@@ -33,6 +39,10 @@ public class FreezingEffect extends Effect {
             target.removePotionEffect(this);
             return;
         }
+
+        float damage = 2*amplifier;
+
+        this.checkIndirectDeathEvent(target, damage);
 
         if (amplifier > 0)
             target.attackEntityFrom(DamageSource.MAGIC, 2*amplifier);

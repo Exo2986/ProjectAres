@@ -51,8 +51,8 @@ public class RayTracingHelper {
             if (result != null) {
                 Entity foundEntity = result.getEntity();
                 Vector3d hitVector = result.getHitVec();
-                double foundDistance = eyePosition.squareDistanceTo(hitVector);
-                if (foundDistance > distance) {
+                //double foundDistance = eyePosition.isWithinDistanceOf()
+                if (!eyePosition.isWithinDistanceOf(hitVector, distance)) {
                     return null;
                 } else {
                     return result;

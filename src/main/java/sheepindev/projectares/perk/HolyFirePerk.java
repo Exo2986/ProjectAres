@@ -9,6 +9,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import sheepindev.projectares.potion.HostilePerkEffect;
 import sheepindev.projectares.registry.RegisterEffects;
 import sheepindev.projectares.registry.RegisterPerks;
 
@@ -29,14 +31,22 @@ public class HolyFirePerk extends Perk {
             PlayerEntity player = (PlayerEntity) event.getSource().getTrueSource();
             MonsterEntity target = (MonsterEntity) event.getEntity();
 
+            HostilePerkEffect effect = (HostilePerkEffect) RegisterEffects.HOLY_FIRE_EFFECT.get();
+            effect.setSourceEntity(player);
+
             if (target.getActivePotionEffect(RegisterEffects.HOLY_FIRE_EFFECT.get()) == null &&
                     target.getActivePotionEffect(RegisterEffects.HOLY_FIRE_COOLDOWN_EFFECT.get()) == null
                     && !(target.world.isRaining() || target.world.isThundering())
                     && !target.isSwimming()) {
                 System.out.println("holy fire");
-                target.addPotionEffect(new EffectInstance(RegisterEffects.HOLY_FIRE_EFFECT.get(), 5 * 20, 0, false, false));
+                target.addPotionEffect(new EffectInstance(effect, 5 * 20, 0, false, false));
             }
         }
+    }
+
+    @Override
+    public void onKill(ItemStack item, LivingDeathEvent event) {
+        event.getEntityLiving().removePotionEffect(RegisterEffects.HOLY_FIRE_EFFECT.get());
     }
 
     @Override

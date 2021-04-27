@@ -16,13 +16,22 @@ public class KillingWindPerk extends ApplyEffectPerk {
         return 5*20;
     }
 
-    @Override
-    public void onKill(ItemStack item, LivingDeathEvent event) {
+    public void processKill(ItemStack item, LivingDeathEvent event) {
         if (event.getSource().getTrueSource() != null
                 && event.getSource().getTrueSource() instanceof LivingEntity) {
             LivingEntity entity = (LivingEntity) event.getSource().getTrueSource();
 
             applyOrAmplifyEffect(RegisterEffects.KILLING_WIND_EFFECT.get(), entity);
         }
+    }
+
+    @Override
+    public void onKill(ItemStack item, LivingDeathEvent event) {
+        processKill(item, event);
+    }
+
+    @Override
+    public void onIndirectKill(ItemStack item, LivingDeathEvent event) {
+        processKill(item, event);
     }
 }
