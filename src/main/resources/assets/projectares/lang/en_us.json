@@ -10,6 +10,7 @@
   "effect.projectares.freezing"             : "Freezing",
   "effect.projectares.killing_wind"         : "Killing Wind",
   "effect.projectares.moving_target"        : "Moving Target",
+  "effect.projectares.hold_your_ground"     : "Hold Your Ground",
 
   "projectares.perk.unknown"                : "Unknown perk: %s",
 
@@ -35,5 +36,6 @@
   "projectares.perk.final_stand"            : "Final Stand",
   "projectares.perk.chorus_imbued"          : "Chorus Imbued",
   "projectares.perk.killing_wind"           : "Killing Wind",
-  "projectares.perk.moving_target"          : "Moving Target"
+  "projectares.perk.moving_target"          : "Moving Target",
+  "projectares.perk.hold_your_ground"       : "Hold Your Ground"
 }

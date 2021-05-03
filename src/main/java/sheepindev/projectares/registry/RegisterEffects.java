@@ -43,4 +43,7 @@ public class RegisterEffects {
 
     public static final RegistryObject<Effect> MOVING_TARGET_EFFECT = EFFECTS.register("moving_target", () ->
             new BasicEffect(EffectType.BENEFICIAL, 9643043).addAttributesModifier(Attributes.ATTACK_SPEED, String.valueOf(UUID.randomUUID()), 0.5F, AttributeModifier.Operation.MULTIPLY_BASE));
+
+    public static final RegistryObject<Effect> HOLD_YOUR_GROUND_EFFECT = EFFECTS.register("hold_your_ground", () ->
+            new BasicEffect(EffectType.BENEFICIAL, 9643043).addAttributesModifier(Attributes.ATTACK_DAMAGE, String.valueOf(UUID.randomUUID()), 0.2F, AttributeModifier.Operation.MULTIPLY_BASE));
 }
