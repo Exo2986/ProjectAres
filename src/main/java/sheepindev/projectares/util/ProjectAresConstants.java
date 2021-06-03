@@ -8,6 +8,8 @@ public class ProjectAresConstants {
 
     public static final String NBT_TAG_NAME_SOUL_CAPACITOR_CHARGE = "perk_soul_capacitor_charge";
 
+    public static final String NBT_TAG_NAME_EYE_PERK = "perk_eye";
+
     public static final String NBT_TAG_NAME_FINAL_STAND_COOLDOWN = "perk_final_stand_cooldown";
 
     public static final String NBT_TAG_NAME_CHORUS_IMBUED_COOLDOWN = "perk_chorus_imbued_cooldown";

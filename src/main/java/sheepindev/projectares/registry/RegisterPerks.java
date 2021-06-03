@@ -70,5 +70,6 @@ public class RegisterPerks {
         registry.register(new KillingWindPerk()     .setRegistryName("killing_wind"));
         registry.register(new MovingTargetPerk()    .setRegistryName("moving_target"));
         registry.register(new HoldYourGroundPerk()  .setRegistryName("hold_your_ground"));
+        registry.register(new EyeForAnEyePerk()     .setRegistryName("eye_for_an_eye"));
     }
 }
