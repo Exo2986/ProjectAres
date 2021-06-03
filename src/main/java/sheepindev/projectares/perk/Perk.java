@@ -80,5 +80,7 @@ public class Perk extends ForgeRegistryEntry<Perk> {
 
     public double getDurability(ItemStack item) { return 0; }
 
+    public boolean isIntrinsic() { return false; }
+
     public AbstractMap.SimpleEntry<Attribute,AttributeModifier> getAttributeModifiers(ItemStack item) { return null; }
 }

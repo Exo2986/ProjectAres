@@ -71,5 +71,8 @@ public class RegisterPerks {
         registry.register(new MovingTargetPerk()    .setRegistryName("moving_target"));
         registry.register(new HoldYourGroundPerk()  .setRegistryName("hold_your_ground"));
         registry.register(new EyeForAnEyePerk()     .setRegistryName("eye_for_an_eye"));
+
+        //Intrinsics
+        registry.register(new SolarAffinityPerk()   .setRegistryName("solar_affinity"));
     }
 }

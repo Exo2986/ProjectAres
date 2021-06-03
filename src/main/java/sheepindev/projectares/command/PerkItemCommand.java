@@ -9,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import sheepindev.projectares.command.arguments.PerkArgument;
+import sheepindev.projectares.item.DungeonSwordPerkItem;
 import sheepindev.projectares.item.PerkItem;
 import sheepindev.projectares.perk.Perk;
 import sheepindev.projectares.registry.RegisterPerks;
@@ -34,7 +35,7 @@ public class PerkItemCommand {
     }
 
     private static int giveItem(CommandSource source, Perk perk1, Perk perk2) {
-        PerkItem item = (PerkItem) ForgeRegistries.ITEMS.getValue(prefix("dungeon_sword"));
+        DungeonSwordPerkItem item = (DungeonSwordPerkItem) ForgeRegistries.ITEMS.getValue(prefix("dungeon_sword"));
         if (item == null) {
             return 0;
         }

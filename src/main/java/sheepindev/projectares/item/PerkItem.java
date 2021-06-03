@@ -19,14 +19,17 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.registries.ForgeRegistries;
 import sheepindev.projectares.perk.Perk;
 import sheepindev.projectares.registry.RegisterPerks;
+import sheepindev.projectares.util.SwordRollHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -37,10 +40,13 @@ import java.util.function.Consumer;
 import static sheepindev.projectares.registry.RegisterPerks.getRegisteredPerk;
 import static sheepindev.projectares.util.ProjectAresConstants.*;
 import static sheepindev.projectares.util.ProjectAresConstants.MOD_ID;
+import static sheepindev.projectares.util.RegistryHelper.prefix;
 
 public class PerkItem extends Item {
 
     protected int getMaxPerks() { return 2; }
+
+    protected int getMaxInstrinsics() { return 0; }
 
     public PerkItem(Properties properties) {
         super(properties);
@@ -69,13 +75,39 @@ public class PerkItem extends Item {
         }
     }
 
+    public Perk getIntrinsic() {
+        return getRegisteredPerk(prefix("evasion"));
+    }
+
+    public void addIntrinsic(ItemStack stack) {
+
+        System.out.println("intrinsic");
+        if (getMaxInstrinsics() == 0) return;
+
+        Perk perk = getIntrinsic();
+
+        System.out.println("intrinsic is " + perk.getRegistryName());
+        CompoundNBT nbt = stack.getOrCreateTag();
+
+        ListNBT perks = nbt.getList(NBT_TAG_NAME_PERK_LIST, Constants.NBT.TAG_COMPOUND);
+
+        CompoundNBT write = new CompoundNBT();
+        write.putString(NBT_TAG_NAME_PERK_KEY, perk.getRegistryName().toString());
+
+        perks.addNBTByIndex(getMaxPerks(), write);
+
+        nbt.put(NBT_TAG_NAME_PERK_LIST, perks);
+
+        stack.write(nbt);
+    }
+
     public Perk[] getPerks(ItemStack stack) {
         CompoundNBT nbt = stack.getOrCreateTag();
         ListNBT perks = nbt.getList(NBT_TAG_NAME_PERK_LIST, Constants.NBT.TAG_COMPOUND);
 
-        Perk[] perkArray = new Perk[getMaxPerks()];
+        Perk[] perkArray = new Perk[getMaxPerks() + getMaxInstrinsics()];
 
-        for (int i = 0; i < getMaxPerks(); i++) {
+        for (int i = 0; i < perkArray.length; i++) {
             perkArray[i] = getRegisteredPerk(perks.getCompound(i).getString(NBT_TAG_NAME_PERK_KEY));
             if (perkArray[i] == null)
                 perkArray[i] = new Perk(); //We don't want nullables
@@ -171,6 +203,12 @@ public class PerkItem extends Item {
 
         firePerkEvent(stack, (a) -> a.onRightClick(stack, player));
 
+
+        DungeonSwordPerkItem item = (DungeonSwordPerkItem) ForgeRegistries.ITEMS.getValue(prefix("dungeon_sword"));
+
+        ItemStack itemStack = SwordRollHelper.getRolledItem(item);
+        player.addItemStackToInventory(itemStack);
+
         return ActionResult.resultPass(stack);
     }
 
@@ -184,11 +222,23 @@ public class PerkItem extends Item {
     @OnlyIn(Dist.CLIENT)
     @Override
     public void addInformation(@Nonnull ItemStack itemStack, @Nullable World world, List<ITextComponent> tooltip, @Nonnull ITooltipFlag advanced) {
-        tooltip.add(new TranslationTextComponent("projectares.tooltip.perks").mergeStyle(TextFormatting.GRAY));
+        Perk[] perks = getPerks(itemStack);
 
-        Arrays.stream(getPerks(itemStack)).forEach((a) -> {
+        if (perks.length-1 == getMaxPerks()) { //check if it has more than the technical max
+            tooltip.add(new TranslationTextComponent(MOD_ID + ".tooltip.intrinsic").mergeStyle(TextFormatting.GRAY));
+
+            ResourceLocation intrinsic = perks[getMaxPerks()].getRegistryName();
+            if (intrinsic != null)
+                tooltip.add(new TranslationTextComponent(MOD_ID + ".perk." + intrinsic.getPath()).mergeStyle(TextFormatting.GOLD));
+
+            tooltip.add(new StringTextComponent(""));
+        }
+
+        tooltip.add(new TranslationTextComponent(MOD_ID + ".tooltip.perks").mergeStyle(TextFormatting.GRAY));
+
+        Arrays.stream(perks).forEach((a) -> {
             ResourceLocation name = a.getRegistryName();
-            if (name == null) return;
+            if (name == null || a.isIntrinsic()) return;
             tooltip.add(new TranslationTextComponent(MOD_ID + ".perk." + name.getPath()).mergeStyle(TextFormatting.GOLD));
         });
     }

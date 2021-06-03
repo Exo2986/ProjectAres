@@ -7,13 +7,25 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
+import sheepindev.projectares.perk.Perk;
 
 import java.util.AbstractMap;
 import java.util.Arrays;
 
+import static sheepindev.projectares.registry.RegisterPerks.getRegisteredPerk;
+import static sheepindev.projectares.util.RegistryHelper.prefix;
+
 public class DungeonSwordPerkItem extends PerkItem {
     public DungeonSwordPerkItem(Properties properties) {
         super(properties);
+    }
+
+    @Override
+    protected int getMaxInstrinsics() { return 1; }
+
+    @Override
+    public Perk getIntrinsic() {
+        return getRegisteredPerk(prefix("solar_affinity"));
     }
 
     @Override

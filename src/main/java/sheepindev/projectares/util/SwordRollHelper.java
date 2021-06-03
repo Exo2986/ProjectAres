@@ -18,11 +18,16 @@ public class SwordRollHelper {
         ItemStack itemStack = new ItemStack(item);
 
         Perk first = perks[random.nextInt(perks.length)];
+
+        while (first.isIntrinsic()) {
+            first = perks[random.nextInt(perks.length)];
+        }
+
         ArrayList<Perk> comp = first.getCompatiblePerks();
 
         item.addPerk(itemStack, first);
-
         item.addPerk(itemStack, comp.get(random.nextInt(comp.size())));
+        item.addIntrinsic(itemStack);
 
         return itemStack;
     }

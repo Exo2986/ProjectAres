@@ -7,7 +7,7 @@ import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import static sheepindev.projectares.util.ProjectAresConstants.NBT_TAG_NAME_EYE_PERK;
 
 public class EyeForAnEyePerk extends Perk {
-    public static final float CHARGE_PERCENT = 0.3f;
+    public static final float CHARGE_PERCENT = 0.5f;
 
     protected void dischargePower(ItemStack item) {
         CompoundNBT nbt = item.getOrCreateTag();
